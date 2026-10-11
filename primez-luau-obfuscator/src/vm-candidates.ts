@@ -11,6 +11,7 @@ export interface VmCandidate {
 function isExpressionSafe(expression: Expression, parameters: Set<string>): boolean {
   switch (expression.type) {
     case 'NumberLiteral':
+      return Number.isInteger(expression.value);
     case 'BooleanLiteral':
       return true;
     case 'Identifier':

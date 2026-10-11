@@ -19,6 +19,8 @@ function opcodeMap(seed: number) {
     nop: rotated[5],
     mul,
     add,
+    constOffset: (Math.abs(seed * 17) % 997) + 101,
+    helper: `__p_${Math.abs(seed * 97).toString(36)}`,
   };
 }
 
@@ -66,7 +68,7 @@ function encode(code: Instruction[], map: ReturnType<typeof opcodeMap>, resultRe
   const encoded: number[][] = [];
   for (const [op, a, b, c, kind] of code) {
     if (op === 1) encoded.push([encodeField(map.loadArg, map), encodeField(a, map), encodeField(b ?? 0, map)]);
-    else if (op === 2) encoded.push([encodeField(map.loadConst, map), encodeField(a, map), b ?? 0]);
+    else if (op === 2) encoded.push([encodeField(map.loadConst, map), encodeField(a, map), (b ?? 0) + map.constOffset]);
     else if (op === 3) encoded.push([encodeField(map.unaryNeg, map), encodeField(a, map), encodeField(b ?? 0, map)]);
     else if (op >= 4 && op <= 10) {
       encoded.push([encodeField(map.binary, map), encodeField(a, map), encodeField(b ?? 0, map), encodeField(c ?? 0, map), encodeField(kind ?? op - 3, map)]);
@@ -91,7 +93,7 @@ function lowerCandidate(candidate: VmCandidate, seed: number): string {
   const instructions = encode(code, opcodeMap(seed), result);
   const args = `{${candidate.parameterNames.join(',')}}`;
   const instructionTable = JSON.stringify(instructions).replaceAll('[', '{').replaceAll(']', '}');
-  return `__p_vm(${instructionTable},${args})`;
+  return `${opcodeMap(seed).helper}(${instructionTable},${args})`;
 }
 
 export function lowerVmCandidates(program: Program, seed: number): { lowered: number; prelude: string } {
@@ -102,7 +104,7 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
   }
   const map = opcodeMap(seed);
   const inverse = Array.from({ length: MODULUS }, (_, value) => value).find((value) => (value * map.mul) % MODULUS === 1) ?? 1;
-  const prelude = candidates.length ? `local __p_vm = function(code, args)
+  const prelude = candidates.length ? `local ${map.helper} = function(code, args)
     local function d(v)
         local x = v - ${map.add}
         while x < 0 do x += ${MODULUS} end
@@ -117,7 +119,7 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
         elseif op == ${map.loadArg} then
             registers[d(i[2])] = args[d(i[3])]
         elseif op == ${map.loadConst} then
-            registers[d(i[2])] = i[3]
+            registers[d(i[2])] = i[3] - ${map.constOffset}
         elseif op == ${map.unaryNeg} then
             registers[d(i[2])] = -registers[d(i[3])]
         elseif op == ${map.binary} then

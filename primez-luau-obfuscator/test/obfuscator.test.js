@@ -6,6 +6,7 @@ import { execFileSync } from 'node:child_process';
 const root = new URL('../', import.meta.url);
 const cli = new URL('dist/cli.js', root);
 const fixture = new URL('examples/ui-sample.luau', root);
+const arithmeticFixture = new URL('examples/pure-arithmetic.luau', root);
 const output = new URL('test-output.luau', root);
 
 test('inspect reports a valid Luau UI-style fixture', () => {
@@ -23,4 +24,9 @@ test('build is deterministic for a fixed seed and preserves strict directive', a
   assert.match(first, /^--!strict/);
   assert.match(first, /Instance/);
   await rm(output, { force: true });
+});
+
+test('VM candidate analysis is conservative around Roblox-boundary calls', () => {
+  const result = execFileSync(process.execPath, [cli.pathname, 'build', arithmeticFixture.pathname, output.pathname, '--profile', 'safe', '--seed', '42'], { encoding: 'utf8' });
+  assert.match(result, /VM candidates: 1/);
 });

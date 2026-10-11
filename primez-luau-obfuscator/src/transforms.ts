@@ -1,6 +1,7 @@
 import { parseExpressionFromSource, type Program } from 'luau-parser';
 import { getScopeAnalysis } from './frontend.js';
 import type { TransformProfile } from './types.js';
+import { findVmCandidates } from './vm-candidates.js';
 
 const PUBLIC_NAMES = new Set(['init', 'new', 'start', 'stop', 'Open', 'Close', 'Destroy', 'Connect']);
 
@@ -67,18 +68,21 @@ export interface TransformResult {
   program: Program;
   renamed: number;
   encodedStrings: number;
+  vmCandidates: number;
   prelude: string;
   skipped: string[];
 }
 
 export function applySafeTransforms(program: Program, seed: number, profile: TransformProfile = 'balanced'): TransformResult {
   const renamed = manglePrivateBindings(program, seed);
+  const vmCandidates = findVmCandidates(program).length;
   const key = ((seed % 251) + 251) % 251 || 137;
   const encodedStrings = profile === 'balanced' ? rewriteStrings(program, key) : 0;
   return {
     program,
     renamed,
     encodedStrings,
+    vmCandidates,
     prelude: encodedStrings ? STRING_PRELUDE(key) : '',
     skipped: ['control-flow flattening', 'VM lowering'],
   };

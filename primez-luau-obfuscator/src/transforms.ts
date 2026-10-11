@@ -2,6 +2,7 @@ import { parseExpressionFromSource, type Program } from 'luau-parser';
 import { getScopeAnalysis } from './frontend.js';
 import type { TransformProfile } from './types.js';
 import { findVmCandidates } from './vm-candidates.js';
+import { lowerVmCandidates } from './vm-lower.js';
 
 const PUBLIC_NAMES = new Set(['init', 'new', 'start', 'stop', 'Open', 'Close', 'Destroy', 'Connect']);
 
@@ -69,6 +70,7 @@ export interface TransformResult {
   renamed: number;
   encodedStrings: number;
   vmCandidates: number;
+  vmLowered: number;
   prelude: string;
   skipped: string[];
 }
@@ -76,6 +78,7 @@ export interface TransformResult {
 export function applySafeTransforms(program: Program, seed: number, profile: TransformProfile = 'balanced'): TransformResult {
   const renamed = manglePrivateBindings(program, seed);
   const vmCandidates = findVmCandidates(program).length;
+  const vm = profile === 'balanced' ? lowerVmCandidates(program, seed) : { lowered: 0, prelude: '' };
   const key = ((seed % 251) + 251) % 251 || 137;
   const encodedStrings = profile === 'balanced' ? rewriteStrings(program, key) : 0;
   return {
@@ -83,7 +86,8 @@ export function applySafeTransforms(program: Program, seed: number, profile: Tra
     renamed,
     encodedStrings,
     vmCandidates,
-    prelude: encodedStrings ? STRING_PRELUDE(key) : '',
-    skipped: ['control-flow flattening', 'VM lowering'],
+    vmLowered: vm.lowered,
+    prelude: `${vm.prelude}${encodedStrings ? STRING_PRELUDE(key) : ''}`,
+    skipped: ['control-flow flattening'],
   };
 }

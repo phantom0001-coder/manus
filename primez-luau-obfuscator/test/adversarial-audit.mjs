@@ -59,5 +59,5 @@ for (const [name, source] of Object.entries(cases)) {
       : 'no private identifiers or strings transformed',
   });
 }
-console.log(JSON.stringify({ cases: results, conclusion: 'Current MVP passes parser/runtime compatibility checks, but name and string layers are statically reversible; VM and CFG layers are not production-ready.' }, null, 2));
+console.log(JSON.stringify({ cases: results, conclusion: 'Current MVP passes parser/runtime compatibility checks; name and string layers are statically reversible, selective pure-function VM lowering is active, and broad CFG virtualization remains pending.' }, null, 2));
 await rm(work, { recursive: true, force: true });

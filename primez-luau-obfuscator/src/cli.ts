@@ -44,7 +44,7 @@ cli.command('build <input> <output>')
     const result = applySafeTransforms(program, seed, options.profile);
     await writeFile(output, renderLuau(result.program, directives, result.prelude), 'utf8');
     console.log(`built ${output}`);
-    console.log(`profile: ${options.profile}; renamed bindings: ${result.renamed}; encoded strings: ${result.encodedStrings}; VM candidates: ${result.vmCandidates}`);
+    console.log(`profile: ${options.profile}; renamed bindings: ${result.renamed}; encoded strings: ${result.encodedStrings}; VM candidates: ${result.vmCandidates}; VM lowered: ${result.vmLowered}`);
     printReport({ ...report, skippedTransforms: result.skipped });
   });
 

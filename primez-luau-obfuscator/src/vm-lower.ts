@@ -5,7 +5,7 @@ type Instruction = [number, number, number?, number?, number?];
 const MODULUS = 251;
 
 function opcodeMap(seed: number) {
-  const values = [11, 23, 37, 53, 71, 89, 107];
+  const values = [11, 23, 37, 53, 71, 89, 107, 131, 149, 167];
   const rotate = Math.abs(seed) % values.length;
   const rotated = values.slice(rotate).concat(values.slice(0, rotate));
   const mul = [3, 5, 7, 11, 13, 17, 19][Math.abs(seed) % 7];
@@ -17,15 +17,21 @@ function opcodeMap(seed: number) {
     binary: rotated[3],
     ret: rotated[4],
     nop: rotated[5],
+    fakeA: rotated[6],
+    fakeB: rotated[7],
+    fakeC: rotated[8],
     mul,
     add,
+    mutationMul: 29,
+    mutationAdd: (Math.abs(seed * 43) + 7) % MODULUS,
     constOffset: (Math.abs(seed * 17) % 997) + 101,
     helper: `__p_${Math.abs(seed * 97).toString(36)}`,
   };
 }
 
-function encodeField(value: number, map: ReturnType<typeof opcodeMap>): number {
-  return (value * map.mul + map.add) % MODULUS;
+function encodeField(value: number, map: ReturnType<typeof opcodeMap>, position: number): number {
+  const mutation = (position * map.mutationMul + map.mutationAdd) % MODULUS;
+  return (value * map.mul + map.add + mutation) % MODULUS;
 }
 
 function compileExpression(expression: Expression, params: Map<string, number>, code: Instruction[], next: { value: number }): number {
@@ -66,21 +72,21 @@ function compileExpression(expression: Expression, params: Map<string, number>, 
 
 function encode(code: Instruction[], map: ReturnType<typeof opcodeMap>, resultRegister: number): number[][] {
   const encoded: number[][] = [];
+  const emit = (fields: number[], rawThird = false) => {
+    const position = encoded.length;
+    encoded.push(fields.map((value, index) => rawThird && index === 2 ? value : encodeField(value, map, position)));
+  };
   for (const [op, a, b, c, kind] of code) {
-    if (op === 1) encoded.push([encodeField(map.loadArg, map), encodeField(a, map), encodeField(b ?? 0, map)]);
-    else if (op === 2) encoded.push([encodeField(map.loadConst, map), encodeField(a, map), (b ?? 0) + map.constOffset]);
-    else if (op === 3) encoded.push([encodeField(map.unaryNeg, map), encodeField(a, map), encodeField(b ?? 0, map)]);
+    if (encoded.length % 2 === 0) emit([map.nop, 0]);
+    if (op === 1) emit([map.loadArg, a, b ?? 0]);
+    else if (op === 2) emit([map.loadConst, a, (b ?? 0) + map.constOffset], true);
+    else if (op === 3) emit([map.unaryNeg, a, b ?? 0]);
     else if (op >= 4 && op <= 10) {
-      encoded.push([encodeField(map.binary, map), encodeField(a, map), encodeField(b ?? 0, map), encodeField(c ?? 0, map), encodeField(kind ?? op - 3, map)]);
-    } else if (op === 99) encoded.push([encodeField(map.ret, map), encodeField(resultRegister, map)]);
+      emit([map.binary, a, b ?? 0, c ?? 0, kind ?? op - 3]);
+    } else if (op === 99) emit([map.ret, resultRegister]);
     else throw new Error(`Unknown VM opcode ${op}`);
   }
-  const padded: number[][] = [];
-  encoded.forEach((instruction, index) => {
-    if (index % 2 === 0) padded.push([encodeField(map.nop, map), 0]);
-    padded.push(instruction);
-  });
-  return padded;
+  return encoded;
 }
 
 function lowerCandidate(candidate: VmCandidate, seed: number): string {
@@ -105,8 +111,8 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
   const map = opcodeMap(seed);
   const inverse = Array.from({ length: MODULUS }, (_, value) => value).find((value) => (value * map.mul) % MODULUS === 1) ?? 1;
   const prelude = candidates.length ? `local ${map.helper} = function(code, args)
-    local function d(v)
-        local x = v - ${map.add}
+    local function d(v, position)
+        local x = v - ${map.add} - ((position * ${map.mutationMul} + ${map.mutationAdd}) % ${MODULUS})
         while x < 0 do x += ${MODULUS} end
         return (x * ${inverse}) % ${MODULUS}
     end
@@ -114,17 +120,25 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
     local pc = 1
     while true do
         local i = code[pc]
-        local op = d(i[1])
+        local op = d(i[1], pc - 1)
         if op == ${map.nop} then
+        elseif op == ${map.fakeA} then
+            local shadow = (pc * 3 + 17) % ${MODULUS}
+            if shadow == -1 then registers[1] = shadow end
+        elseif op == ${map.fakeB} then
+            local shadow = nil
+            if shadow ~= nil then return shadow end
+        elseif op == ${map.fakeC} then
+            if false then error("unreachable VM branch") end
         elseif op == ${map.loadArg} then
-            registers[d(i[2])] = args[d(i[3])]
+            registers[d(i[2], pc - 1)] = args[d(i[3], pc - 1)]
         elseif op == ${map.loadConst} then
-            registers[d(i[2])] = i[3] - ${map.constOffset}
+            registers[d(i[2], pc - 1)] = i[3] - ${map.constOffset}
         elseif op == ${map.unaryNeg} then
-            registers[d(i[2])] = -registers[d(i[3])]
+            registers[d(i[2], pc - 1)] = -registers[d(i[3], pc - 1)]
         elseif op == ${map.binary} then
-            local dst, a, b = d(i[2]), registers[d(i[3])], registers[d(i[4])]
-            local kind = d(i[5])
+            local dst, a, b = d(i[2], pc - 1), registers[d(i[3], pc - 1)], registers[d(i[4], pc - 1)]
+            local kind = d(i[5], pc - 1)
             if kind == 1 then registers[dst] = a + b
             elseif kind == 2 then registers[dst] = a - b
             elseif kind == 3 then registers[dst] = a * b
@@ -133,7 +147,7 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
             elseif kind == 6 then registers[dst] = a % b
             else registers[dst] = a ^ b end
         elseif op == ${map.ret} then
-            return registers[d(i[2])]
+            return registers[d(i[2], pc - 1)]
         end
         pc += 1
     end

@@ -102,15 +102,56 @@ function lowerCandidate(candidate: VmCandidate, seed: number): string {
   return `${opcodeMap(seed).helper}(${instructionTable},${args})`;
 }
 
+function walk(value: unknown, visit: (node: Record<string, unknown>) => void): void {
+  if (!value || typeof value !== 'object') return;
+  if (Array.isArray(value)) {
+    for (const item of value) walk(item, visit);
+    return;
+  }
+  const record = value as Record<string, unknown>;
+  if (typeof record.type === 'string') visit(record);
+  for (const [key, child] of Object.entries(record)) {
+    if (key !== 'line' && key !== 'column') walk(child, visit);
+  }
+}
+
+function hideNumericCallArguments(program: Program, candidates: VmCandidate[], seed: number): { count: number; prelude: string } {
+  const names = new Set(candidates.map((candidate) => candidate.functionName).filter((name): name is string => Boolean(name)));
+  if (!names.size) return { count: 0, prelude: '' };
+  const helper = `__n_${Math.abs(seed * 173).toString(36)}`;
+  const base = (Math.abs(seed * 19) % 1000) + 1000;
+  let count = 0;
+  walk(program, (node) => {
+    if (node.type !== 'CallExpression') return;
+    const callee = node.callee as { type?: string; name?: string };
+    if (callee.type !== 'Identifier' || !callee.name || !names.has(callee.name)) return;
+    const argumentsList = node.arguments as Array<{ type?: string; value?: number }>;
+    for (let index = 0; index < argumentsList.length; index += 1) {
+      const argument = argumentsList[index];
+      if (argument.type !== 'NumberLiteral' || typeof argument.value !== 'number') continue;
+      const offset = base + count * 37;
+      const encoded = argument.value + offset;
+      argumentsList[index] = parseExpressionFromSource(`${helper}(${encoded},${offset})`) as typeof argument;
+      count += 1;
+    }
+  });
+  const prelude = count ? `local ${helper} = function(value, offset)
+    return value - offset
+end
+` : '';
+  return { count, prelude };
+}
+
 export function lowerVmCandidates(program: Program, seed: number): { lowered: number; prelude: string } {
   const candidates = findVmCandidates(program);
   for (const candidate of candidates) {
     const returnStatement = candidate.functionBody.body.statements[0] as { type: 'ReturnStatement'; arguments: Expression[] };
     returnStatement.arguments[0] = parseExpressionFromSource(lowerCandidate(candidate, seed));
   }
+  const numeric = hideNumericCallArguments(program, candidates, seed);
   const map = opcodeMap(seed);
   const inverse = Array.from({ length: MODULUS }, (_, value) => value).find((value) => (value * map.mul) % MODULUS === 1) ?? 1;
-  const prelude = candidates.length ? `local ${map.helper} = function(code, args)
+  const vmPrelude = candidates.length ? `local ${map.helper} = function(code, args)
     local function d(v, position)
         local x = v - ${map.add} - ((position * ${map.mutationMul} + ${map.mutationAdd}) % ${MODULUS})
         while x < 0 do x += ${MODULUS} end
@@ -153,5 +194,5 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
     end
 end
 ` : '';
-  return { lowered: candidates.length, prelude };
+  return { lowered: candidates.length, prelude: `${numeric.prelude}${vmPrelude}` };
 }

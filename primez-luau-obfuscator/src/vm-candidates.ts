@@ -3,6 +3,7 @@ import type { Expression, FunctionBody, Node, Program } from 'luau-parser';
 export interface VmCandidate {
   functionBody: FunctionBody;
   parameterNames: string[];
+  functionName?: string;
   reason: 'single-return-arithmetic';
 }
 
@@ -48,6 +49,11 @@ export function findVmCandidates(program: Program): VmCandidate[] {
     const parameterNames = node.params.map((parameter) => parameter.name);
     if (!isExpressionSafe(statement.arguments[0], new Set(parameterNames))) return;
     candidates.push({ functionBody: node, parameterNames, reason: 'single-return-arithmetic' });
+  });
+  walk(program, (node) => {
+    if (node.type !== 'LocalFunctionStatement') return;
+    const candidate = candidates.find((item) => item.functionBody === node.func);
+    if (candidate) candidate.functionName = node.name.name;
   });
   return candidates;
 }

@@ -2,6 +2,7 @@ import { Command } from 'commander';
 import { readFile, writeFile } from 'node:fs/promises';
 import { classifyCompatibility, extractDirectives, parseLuau, renderLuau } from './frontend.js';
 import { applySafeTransforms } from './transforms.js';
+import { scanForSecrets } from './secrets.js';
 import type { TransformProfile } from './types.js';
 
 const cli = new Command();
@@ -33,11 +34,17 @@ cli.command('build <input> <output>')
   .description('Build a safe first-pass protected Luau artifact')
   .option('--profile <profile>', 'safe, balanced, strong, or maximum', 'balanced')
   .option('--seed <seed>', 'deterministic numeric seed', '1337')
-  .action(async (input: string, output: string, options: { profile: TransformProfile; seed: string }) => {
+  .option('--allow-secrets', 'allow detected credential-like material; not recommended for client scripts')
+  .action(async (input: string, output: string, options: { profile: TransformProfile; seed: string; allowSecrets?: boolean }) => {
     if (options.profile === 'strong' || options.profile === 'maximum') {
       throw new Error(`${options.profile} profile is not enabled yet; refusing to silently produce a weaker artifact`);
     }
     const { source, program, directives } = await load(input);
+    const secrets = scanForSecrets(source);
+    if (secrets.length && !options.allowSecrets) {
+      const summary = secrets.map((finding) => `${finding.kind} at line ${finding.line}`).join(', ');
+      throw new Error(`refusing to build client artifact: detected ${summary}; move secrets server-side or use --allow-secrets only for a controlled test`);
+    }
     const report = classifyCompatibility(source, program);
     const seed = Number.parseInt(options.seed, 10);
     if (!Number.isSafeInteger(seed)) throw new Error('seed must be a safe integer');

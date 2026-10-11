@@ -30,7 +30,7 @@ function rewriteStrings(value: unknown, key: number): number {
     for (let index = 0; index < value.length; index += 1) {
       const item = value[index] as { type?: string; value?: string } | undefined;
       if (item?.type === 'StringLiteral') {
-        const bytes = [...Buffer.from(item.value ?? '', 'utf8')];
+        const bytes = [...Buffer.from(item.value ?? '', 'utf8')].map((byte) => byte ^ key);
         value[index] = parseExpressionFromSource(`__p_decode({${bytes.join(',')}},${key})`);
         count += 1;
       } else {
@@ -47,7 +47,7 @@ function rewriteStrings(value: unknown, key: number): number {
     if (name === 'line' || name === 'column') continue;
     const item = child as { type?: string; value?: string } | undefined;
     if (item?.type === 'StringLiteral') {
-      const bytes = [...Buffer.from(item.value ?? '', 'utf8')];
+      const bytes = [...Buffer.from(item.value ?? '', 'utf8')].map((byte) => byte ^ key);
       node[name] = parseExpressionFromSource(`__p_decode({${bytes.join(',')}},${key})`);
       count += 1;
     } else {

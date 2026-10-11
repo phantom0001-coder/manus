@@ -34,14 +34,14 @@ cli.command('build <input> <output>')
   .description('Build a safe first-pass protected Luau artifact')
   .option('--profile <profile>', 'safe, balanced, strong, or maximum', 'balanced')
   .option('--seed <seed>', 'deterministic numeric seed', '1337')
-  .option('--allow-secrets', 'allow detected credential-like material; not recommended for client scripts')
-  .action(async (input: string, output: string, options: { profile: TransformProfile; seed: string; allowSecrets?: boolean }) => {
+  .option('--strict-secrets', 'fail on detected credential-like material; opt-in security scan')
+  .action(async (input: string, output: string, options: { profile: TransformProfile; seed: string; strictSecrets?: boolean }) => {
     if (options.profile === 'strong' || options.profile === 'maximum') {
       throw new Error(`${options.profile} profile is not enabled yet; refusing to silently produce a weaker artifact`);
     }
     const { source, program, directives } = await load(input);
     const secrets = scanForSecrets(source);
-    if (secrets.length && !options.allowSecrets) {
+    if (secrets.length && options.strictSecrets) {
       const summary = secrets.map((finding) => `${finding.kind} at line ${finding.line}`).join(', ');
       throw new Error(`refusing to build client artifact: detected ${summary}; move secrets server-side or use --allow-secrets only for a controlled test`);
     }

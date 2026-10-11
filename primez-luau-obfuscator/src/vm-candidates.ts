@@ -4,7 +4,8 @@ export interface VmCandidate {
   functionBody: FunctionBody;
   parameterNames: string[];
   functionName?: string;
-  reason: 'single-return-arithmetic';
+  kind: 'expression' | 'branch';
+  reason: 'single-return-arithmetic' | 'pure-branch';
 }
 
 function isExpressionSafe(expression: Expression, parameters: Set<string>): boolean {
@@ -19,7 +20,7 @@ function isExpressionSafe(expression: Expression, parameters: Set<string>): bool
     case 'UnaryExpression':
       return expression.operator === '-' && isExpressionSafe(expression.argument, parameters);
     case 'BinaryExpression':
-      return ['+', '-', '*', '/', '//', '%', '^'].includes(expression.operator)
+      return ['+', '-', '*', '/', '//', '%', '^', '>', '<', '>=', '<=', '==', '~='].includes(expression.operator)
         && isExpressionSafe(expression.left, parameters)
         && isExpressionSafe(expression.right, parameters);
     default:
@@ -45,10 +46,26 @@ export function findVmCandidates(program: Program): VmCandidate[] {
   walk(program, (node) => {
     if (node.type !== 'FunctionBody' || node.body.statements.length !== 1) return;
     const statement = node.body.statements[0];
-    if (statement.type !== 'ReturnStatement' || statement.arguments.length !== 1) return;
     const parameterNames = node.params.map((parameter) => parameter.name);
-    if (!isExpressionSafe(statement.arguments[0], new Set(parameterNames))) return;
-    candidates.push({ functionBody: node, parameterNames, reason: 'single-return-arithmetic' });
+    const parameters = new Set(parameterNames);
+    if (statement.type === 'ReturnStatement' && statement.arguments.length === 1
+      && isExpressionSafe(statement.arguments[0], parameters)) {
+      candidates.push({ functionBody: node, parameterNames, kind: 'expression', reason: 'single-return-arithmetic' });
+      return;
+    }
+    if (statement.type !== 'IfStatement' || statement.clauses.length !== 1) return;
+    const clause = statement.clauses[0];
+    const alternate = statement.alternate;
+    const trueReturn = clause.body.statements.length === 1 ? clause.body.statements[0] : null;
+    const falseReturn = alternate && alternate.statements.length === 1 ? alternate.statements[0] : null;
+    if (trueReturn?.type !== 'ReturnStatement' || falseReturn?.type !== 'ReturnStatement') return;
+    if (trueReturn.arguments.length !== 1 || falseReturn.arguments.length !== 1) return;
+    if (!isExpressionSafe(clause.condition, parameters)
+      || !isExpressionSafe(trueReturn.arguments[0], parameters)
+      || !isExpressionSafe(falseReturn.arguments[0], parameters)) return;
+    if (clause.condition.type !== 'BinaryExpression'
+      || !['>', '<', '>=', '<=', '==', '~='].includes(clause.condition.operator)) return;
+    candidates.push({ functionBody: node, parameterNames, kind: 'branch', reason: 'pure-branch' });
   });
   walk(program, (node) => {
     if (node.type !== 'LocalFunctionStatement') return;

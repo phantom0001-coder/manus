@@ -5,7 +5,7 @@ type Instruction = [number, number, number?, number?, number?];
 const MODULUS = 251;
 
 function opcodeMap(seed: number) {
-  const values = [11, 23, 37, 53, 71, 89, 107, 131, 149, 167];
+  const values = [11, 23, 37, 53, 71, 89, 107, 131, 149, 167, 181, 193];
   const rotate = Math.abs(seed) % values.length;
   const rotated = values.slice(rotate).concat(values.slice(0, rotate));
   const mul = [3, 5, 7, 11, 13, 17, 19][Math.abs(seed) % 7];
@@ -20,6 +20,8 @@ function opcodeMap(seed: number) {
     fakeA: rotated[6],
     fakeB: rotated[7],
     fakeC: rotated[8],
+    compare: rotated[9],
+    select: rotated[10],
     mul,
     add,
     mutationMul: 29,
@@ -70,6 +72,16 @@ function compileExpression(expression: Expression, params: Map<string, number>, 
   }
 }
 
+function compileComparison(expression: Extract<Expression, { type: 'BinaryExpression' }>, params: Map<string, number>, code: Instruction[], next: { value: number }): number {
+  const left = compileExpression(expression.left, params, code, next);
+  const right = compileExpression(expression.right, params, code, next);
+  const kind = ['>', '<', '>=', '<=', '==', '~='].indexOf(expression.operator) + 1;
+  if (kind < 1) throw new Error(`Unsupported VM comparison ${expression.operator}`);
+  const destination = next.value++;
+  code.push([11, destination, left, right, kind]);
+  return destination;
+}
+
 function encode(code: Instruction[], map: ReturnType<typeof opcodeMap>, resultRegister: number): number[][] {
   const encoded: number[][] = [];
   const emit = (fields: number[], rawThird = false) => {
@@ -83,6 +95,10 @@ function encode(code: Instruction[], map: ReturnType<typeof opcodeMap>, resultRe
     else if (op === 3) emit([map.unaryNeg, a, b ?? 0]);
     else if (op >= 4 && op <= 10) {
       emit([map.binary, a, b ?? 0, c ?? 0, kind ?? op - 3]);
+    } else if (op === 11) {
+      emit([map.compare, a, b ?? 0, c ?? 0, kind ?? 1]);
+    } else if (op === 12) {
+      emit([map.select, a, b ?? 0, c ?? 0, kind ?? 0]);
     } else if (op === 99) emit([map.ret, resultRegister]);
     else throw new Error(`Unknown VM opcode ${op}`);
   }
@@ -93,8 +109,18 @@ function lowerCandidate(candidate: VmCandidate, seed: number): string {
   const params = new Map(candidate.parameterNames.map((name, index) => [name, index + 1]));
   const code: Instruction[] = [];
   const next = { value: 1 };
-  const returnStatement = candidate.functionBody.body.statements[0] as { type: 'ReturnStatement'; arguments: Expression[] };
-  const result = compileExpression(returnStatement.arguments[0], params, code, next);
+  const statement = candidate.functionBody.body.statements[0] as any;
+  let result: number;
+  if (candidate.kind === 'expression') {
+    result = compileExpression(statement.arguments[0], params, code, next);
+  } else {
+    const clause = statement.clauses[0];
+    const condition = compileComparison(clause.condition, params, code, next);
+    const whenTrue = compileExpression(clause.body.statements[0].arguments[0], params, code, next);
+    const whenFalse = compileExpression(statement.alternate.statements[0].arguments[0], params, code, next);
+    result = next.value++;
+    code.push([12, result, condition, whenTrue, whenFalse]);
+  }
   code.push([99, result]);
   const instructions = encode(code, opcodeMap(seed), result);
   const args = `{${candidate.parameterNames.join(',')}}`;
@@ -151,8 +177,13 @@ end
 export function lowerVmCandidates(program: Program, seed: number): { lowered: number; prelude: string } {
   const candidates = findVmCandidates(program);
   for (const candidate of candidates) {
-    const returnStatement = candidate.functionBody.body.statements[0] as { type: 'ReturnStatement'; arguments: Expression[] };
-    returnStatement.arguments[0] = parseExpressionFromSource(lowerCandidate(candidate, seed));
+    const statement = candidate.functionBody.body.statements[0] as any;
+    if (candidate.kind === 'expression') {
+      statement.arguments[0] = parseExpressionFromSource(lowerCandidate(candidate, seed));
+    } else {
+      statement.type = 'ReturnStatement';
+      statement.arguments = [parseExpressionFromSource(lowerCandidate(candidate, seed))];
+    }
   }
   const numeric = hideNumericCallArguments(program, candidates, seed);
   const map = opcodeMap(seed);
@@ -193,6 +224,21 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
             elseif kind == 5 then registers[dst] = a // b
             elseif kind == 6 then registers[dst] = a % b
             else registers[dst] = a ^ b end
+        elseif op == ${map.compare} then
+            local dst, a, b = d(i[2], pc - 1), registers[d(i[3], pc - 1)], registers[d(i[4], pc - 1)]
+            local kind = d(i[5], pc - 1)
+            if kind == 1 then registers[dst] = a > b and 1 or 0
+            elseif kind == 2 then registers[dst] = a < b and 1 or 0
+            elseif kind == 3 then registers[dst] = a >= b and 1 or 0
+            elseif kind == 4 then registers[dst] = a <= b and 1 or 0
+            elseif kind == 5 then registers[dst] = a == b and 1 or 0
+            else registers[dst] = a ~= b and 1 or 0 end
+        elseif op == ${map.select} then
+            local dst = d(i[2], pc - 1)
+            local condition = registers[d(i[3], pc - 1)]
+            local whenTrue = registers[d(i[4], pc - 1)]
+            local whenFalse = registers[d(i[5], pc - 1)]
+            registers[dst] = condition ~= 0 and whenTrue or whenFalse
         elseif op == ${map.ret} then
             return registers[d(i[2], pc - 1)]
         end

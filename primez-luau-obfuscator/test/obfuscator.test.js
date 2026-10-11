@@ -8,6 +8,7 @@ const cli = new URL('dist/cli.js', root);
 const fixture = new URL('examples/ui-sample.luau', root);
 const arithmeticFixture = new URL('examples/pure-arithmetic.luau', root);
 const executorFixture = new URL('examples/executor-apis.luau', root);
+const executorMatrixFixture = new URL('examples/executor-matrix.luau', root);
 const output = new URL('test-output.luau', root);
 
 test('inspect reports a valid Luau UI-style fixture', () => {
@@ -38,4 +39,12 @@ test('executor APIs are classified as dynamic and are not renamed as locals', ()
   assert.match(result, /identifyexecutor/);
   assert.match(result, /loadstring/);
   assert.match(result, /gethui/);
+});
+
+test('expanded executor matrix remains outside VM lowering', () => {
+  const result = execFileSync(process.execPath, [cli.pathname, 'build', executorMatrixFixture.pathname, output.pathname, '--profile', 'balanced', '--seed', '777'], { encoding: 'utf8' });
+  assert.match(result, /compatibility: DYNAMIC/);
+  assert.match(result, /VM candidates: 0/);
+  assert.match(result, /hookmetamethod/);
+  assert.match(result, /Drawing/);
 });

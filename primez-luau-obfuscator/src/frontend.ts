@@ -7,6 +7,11 @@ const DYNAMIC_GLOBALS = new Set([
   'identifyexecutor', 'hookfunction', 'hookmetamethod', 'newcclosure', 'clonefunction',
   'setclipboard', 'toclipboard', 'writeclipboard', 'write_clipboard', 'gethui',
   'cloneref', 'request', 'http_request', 'getcustomasset', 'firesignal',
+  'newcclosure', 'hookfunction', 'hookmetamethod', 'getrawmetatable', 'setreadonly',
+  'make_readonly', 'make_writeable', 'queue_on_teleport', 'queueonteleport',
+  'fireclickdetector', 'fireproximityprompt', 'firetouchinterest', 'getconnections',
+  'getcallingscript', 'getscriptclosure', 'getgc', 'getreg', 'getinstances',
+  'getnilinstances', 'getloadedmodules', 'Drawing', 'debug',
 ]);
 
 const UNSUPPORTED_MARKERS = ['__namecall', 'syn.', 'KRNL', 'Celery', 'Drawing'];

@@ -106,6 +106,7 @@ function encode(code: Instruction[], map: ReturnType<typeof opcodeMap>, resultRe
 }
 
 function lowerCandidate(candidate: VmCandidate, seed: number): string {
+  const map = opcodeMap(seed);
   const params = new Map(candidate.parameterNames.map((name, index) => [name, index + 1]));
   const code: Instruction[] = [];
   const next = { value: 1 };
@@ -122,10 +123,10 @@ function lowerCandidate(candidate: VmCandidate, seed: number): string {
     code.push([12, result, condition, whenTrue, whenFalse]);
   }
   code.push([99, result]);
-  const instructions = encode(code, opcodeMap(seed), result);
+  const instructions = encode(code, map, result);
   const args = `{${candidate.parameterNames.join(',')}}`;
   const instructionTable = JSON.stringify(instructions).replaceAll('[', '{').replaceAll(']', '}');
-  return `${opcodeMap(seed).helper}(${instructionTable},${args})`;
+  return `${map.helper}(${instructionTable},${args})`;
 }
 
 function walk(value: unknown, visit: (node: Record<string, unknown>) => void): void {
@@ -174,21 +175,9 @@ end
   return { count, prelude };
 }
 
-export function lowerVmCandidates(program: Program, seed: number): { lowered: number; prelude: string } {
-  const candidates = findVmCandidates(program);
-  for (const candidate of candidates) {
-    const statement = candidate.functionBody.body.statements[0] as any;
-    if (candidate.kind === 'expression') {
-      statement.arguments[0] = parseExpressionFromSource(lowerCandidate(candidate, seed));
-    } else {
-      statement.type = 'ReturnStatement';
-      statement.arguments = [parseExpressionFromSource(lowerCandidate(candidate, seed))];
-    }
-  }
-  const numeric = hideNumericCallArguments(program, candidates, seed);
-  const map = opcodeMap(seed);
+function renderDispatcher(map: ReturnType<typeof opcodeMap>): string {
   const inverse = Array.from({ length: MODULUS }, (_, value) => value).find((value) => (value * map.mul) % MODULUS === 1) ?? 1;
-  const vmPrelude = candidates.length ? `local ${map.helper} = function(code, args)
+  return `local ${map.helper} = function(code, args)
     local function d(v, position)
         local x = v - ${map.add} - ((position * ${map.mutationMul} + ${map.mutationAdd}) % ${MODULUS})
         while x < 0 do x += ${MODULUS} end
@@ -245,6 +234,23 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
         pc += 1
     end
 end
-` : '';
+`;
+}
+
+export function lowerVmCandidates(program: Program, seed: number): { lowered: number; prelude: string } {
+  const candidates = findVmCandidates(program);
+  const dispatcherSeeds = candidates.map((_, index) => seed + index + 1);
+  for (let index = 0; index < candidates.length; index += 1) {
+    const candidate = candidates[index];
+    const statement = candidate.functionBody.body.statements[0] as any;
+    if (candidate.kind === 'expression') {
+      statement.arguments[0] = parseExpressionFromSource(lowerCandidate(candidate, dispatcherSeeds[index]));
+    } else {
+      statement.type = 'ReturnStatement';
+      statement.arguments = [parseExpressionFromSource(lowerCandidate(candidate, dispatcherSeeds[index]))];
+    }
+  }
+  const numeric = hideNumericCallArguments(program, candidates, seed);
+  const vmPrelude = dispatcherSeeds.map((dispatcherSeed) => renderDispatcher(opcodeMap(dispatcherSeed))).join('\n');
   return { lowered: candidates.length, prelude: `${numeric.prelude}${vmPrelude}` };
 }

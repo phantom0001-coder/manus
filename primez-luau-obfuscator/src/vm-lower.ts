@@ -2,12 +2,28 @@ import { parseExpressionFromSource, type Expression, type Program } from 'luau-p
 import { findVmCandidates, type VmCandidate } from './vm-candidates.js';
 
 type Instruction = [number, number, number?, number?, number?];
+const MODULUS = 251;
 
 function opcodeMap(seed: number) {
-  const values = [11, 23, 37, 53, 71, 89];
+  const values = [11, 23, 37, 53, 71, 89, 107];
   const rotate = Math.abs(seed) % values.length;
   const rotated = values.slice(rotate).concat(values.slice(0, rotate));
-  return { loadArg: rotated[0], loadConst: rotated[1], unaryNeg: rotated[2], binary: rotated[3], ret: rotated[4] };
+  const mul = [3, 5, 7, 11, 13, 17, 19][Math.abs(seed) % 7];
+  const add = (Math.abs(seed * 31) + 17) % MODULUS;
+  return {
+    loadArg: rotated[0],
+    loadConst: rotated[1],
+    unaryNeg: rotated[2],
+    binary: rotated[3],
+    ret: rotated[4],
+    nop: rotated[5],
+    mul,
+    add,
+  };
+}
+
+function encodeField(value: number, map: ReturnType<typeof opcodeMap>): number {
+  return (value * map.mul + map.add) % MODULUS;
 }
 
 function compileExpression(expression: Expression, params: Map<string, number>, code: Instruction[], next: { value: number }): number {
@@ -47,14 +63,22 @@ function compileExpression(expression: Expression, params: Map<string, number>, 
 }
 
 function encode(code: Instruction[], map: ReturnType<typeof opcodeMap>, resultRegister: number): number[][] {
-  return code.map(([op, a, b, c, kind]) => {
-    if (op === 1) return [map.loadArg, a, b ?? 0];
-    if (op === 2) return [map.loadConst, a, b ?? 0];
-    if (op === 3) return [map.unaryNeg, a, b ?? 0];
-    if (op >= 4 && op <= 10) return [map.binary, a, b ?? 0, c ?? 0, kind ?? op - 3];
-    if (op === 99) return [map.ret, resultRegister];
-    throw new Error(`Unknown VM opcode ${op}`);
+  const encoded: number[][] = [];
+  for (const [op, a, b, c, kind] of code) {
+    if (op === 1) encoded.push([encodeField(map.loadArg, map), encodeField(a, map), encodeField(b ?? 0, map)]);
+    else if (op === 2) encoded.push([encodeField(map.loadConst, map), encodeField(a, map), b ?? 0]);
+    else if (op === 3) encoded.push([encodeField(map.unaryNeg, map), encodeField(a, map), encodeField(b ?? 0, map)]);
+    else if (op >= 4 && op <= 10) {
+      encoded.push([encodeField(map.binary, map), encodeField(a, map), encodeField(b ?? 0, map), encodeField(c ?? 0, map), encodeField(kind ?? op - 3, map)]);
+    } else if (op === 99) encoded.push([encodeField(map.ret, map), encodeField(resultRegister, map)]);
+    else throw new Error(`Unknown VM opcode ${op}`);
+  }
+  const padded: number[][] = [];
+  encoded.forEach((instruction, index) => {
+    if (index % 2 === 0) padded.push([encodeField(map.nop, map), 0]);
+    padded.push(instruction);
   });
+  return padded;
 }
 
 function lowerCandidate(candidate: VmCandidate, seed: number): string {
@@ -77,30 +101,37 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
     returnStatement.arguments[0] = parseExpressionFromSource(lowerCandidate(candidate, seed));
   }
   const map = opcodeMap(seed);
+  const inverse = Array.from({ length: MODULUS }, (_, value) => value).find((value) => (value * map.mul) % MODULUS === 1) ?? 1;
   const prelude = candidates.length ? `local __p_vm = function(code, args)
+    local function d(v)
+        local x = v - ${map.add}
+        while x < 0 do x += ${MODULUS} end
+        return (x * ${inverse}) % ${MODULUS}
+    end
     local registers = {}
     local pc = 1
     while true do
         local i = code[pc]
-        local op = i[1]
-        if op == ${map.loadArg} then
-            registers[i[2]] = args[i[3]]
+        local op = d(i[1])
+        if op == ${map.nop} then
+        elseif op == ${map.loadArg} then
+            registers[d(i[2])] = args[d(i[3])]
         elseif op == ${map.loadConst} then
-            registers[i[2]] = i[3]
+            registers[d(i[2])] = i[3]
         elseif op == ${map.unaryNeg} then
-            registers[i[2]] = -registers[i[3]]
+            registers[d(i[2])] = -registers[d(i[3])]
         elseif op == ${map.binary} then
-            local a, b = registers[i[3]], registers[i[4]]
-            local kind = i[5]
-            if kind == 1 then registers[i[2]] = a + b
-            elseif kind == 2 then registers[i[2]] = a - b
-            elseif kind == 3 then registers[i[2]] = a * b
-            elseif kind == 4 then registers[i[2]] = a / b
-            elseif kind == 5 then registers[i[2]] = a // b
-            elseif kind == 6 then registers[i[2]] = a % b
-            else registers[i[2]] = a ^ b end
+            local dst, a, b = d(i[2]), registers[d(i[3])], registers[d(i[4])]
+            local kind = d(i[5])
+            if kind == 1 then registers[dst] = a + b
+            elseif kind == 2 then registers[dst] = a - b
+            elseif kind == 3 then registers[dst] = a * b
+            elseif kind == 4 then registers[dst] = a / b
+            elseif kind == 5 then registers[dst] = a // b
+            elseif kind == 6 then registers[dst] = a % b
+            else registers[dst] = a ^ b end
         elseif op == ${map.ret} then
-            return registers[i[2]]
+            return registers[d(i[2])]
         end
         pc += 1
     end

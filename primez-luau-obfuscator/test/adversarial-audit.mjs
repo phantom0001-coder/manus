@@ -25,11 +25,12 @@ function deobfuscateNames(source) {
 
 function deobfuscateStrings(source) {
   let count = 0;
-  const recovered = source.replace(/__p_decode\(\{([\d\s,]+)\},\s*(\d+)\)/g, (_, rawBytes, rawKey) => {
+  const recovered = source.replace(/__p_decode\(\{([\d\s,]+)\},\s*(\d+)\s*,\s*(\d+)\)/g, (_, rawBytes, rawKey, rawStep) => {
     const key = Number(rawKey);
+    const step = Number(rawStep);
     const bytes = rawBytes.split(',').map((value) => Number(value.trim())).filter(Number.isFinite);
     count += 1;
-    return JSON.stringify(Buffer.from(bytes.map((value) => value ^ key)).toString('utf8'));
+    return JSON.stringify(Buffer.from(bytes.map((value, index) => (value - key - index * step + 256 * 256) % 256)).toString('utf8'));
   });
   return { source: recovered, count };
 }

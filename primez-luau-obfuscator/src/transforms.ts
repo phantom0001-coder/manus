@@ -24,18 +24,18 @@ export function manglePrivateBindings(program: Program, seed: number): number {
   return index;
 }
 
-function rewriteStrings(value: unknown, key: number): number {
+function rewriteStrings(value: unknown, key: number, step: number): number {
   if (!value || typeof value !== 'object') return 0;
   if (Array.isArray(value)) {
     let count = 0;
     for (let index = 0; index < value.length; index += 1) {
       const item = value[index] as { type?: string; value?: string } | undefined;
       if (item?.type === 'StringLiteral') {
-        const bytes = [...Buffer.from(item.value ?? '', 'utf8')].map((byte) => byte ^ key);
-        value[index] = parseExpressionFromSource(`__p_decode({${bytes.join(',')}},${key})`);
+        const bytes = [...Buffer.from(item.value ?? '', 'utf8')].map((byte, offset) => (byte + key + offset * step) % 256);
+        value[index] = parseExpressionFromSource(`__p_decode({${bytes.join(',')}},${key},${step})`);
         count += 1;
       } else {
-        count += rewriteStrings(item, key);
+        count += rewriteStrings(item, key, step);
       }
     }
     return count;
@@ -48,19 +48,23 @@ function rewriteStrings(value: unknown, key: number): number {
     if (name === 'line' || name === 'column') continue;
     const item = child as { type?: string; value?: string } | undefined;
     if (item?.type === 'StringLiteral') {
-      const bytes = [...Buffer.from(item.value ?? '', 'utf8')].map((byte) => byte ^ key);
-      node[name] = parseExpressionFromSource(`__p_decode({${bytes.join(',')}},${key})`);
+      const bytes = [...Buffer.from(item.value ?? '', 'utf8')].map((byte, offset) => (byte + key + offset * step) % 256);
+      node[name] = parseExpressionFromSource(`__p_decode({${bytes.join(',')}},${key},${step})`);
       count += 1;
     } else {
-      count += rewriteStrings(child, key);
+      count += rewriteStrings(child, key, step);
     }
   }
   return count;
 }
 
-const STRING_PRELUDE = (key: number) => `local __p_decode = function(data, key)
+const STRING_PRELUDE = (key: number, step: number) => `local __p_decode = function(data, key, stride)
     local out = {}
-    for i, byte in data do out[i] = string.char(bit32.bxor(byte, key)) end
+    for i, byte in data do
+        local value = byte - key - ((i - 1) * stride)
+        while value < 0 do value += 256 end
+        out[i] = string.char(value % 256)
+    end
     return table.concat(out)
 end
 `;
@@ -80,14 +84,15 @@ export function applySafeTransforms(program: Program, seed: number, profile: Tra
   const vmCandidates = findVmCandidates(program).length;
   const vm = profile === 'balanced' ? lowerVmCandidates(program, seed) : { lowered: 0, prelude: '' };
   const key = ((seed % 251) + 251) % 251 || 137;
-  const encodedStrings = profile === 'balanced' ? rewriteStrings(program, key) : 0;
+  const step = ((Math.abs(seed * 7) % 31) + 5);
+  const encodedStrings = profile === 'balanced' ? rewriteStrings(program, key, step) : 0;
   return {
     program,
     renamed,
     encodedStrings,
     vmCandidates,
     vmLowered: vm.lowered,
-    prelude: `${vm.prelude}${encodedStrings ? STRING_PRELUDE(key) : ''}`,
+    prelude: `${vm.prelude}${encodedStrings ? STRING_PRELUDE(key, step) : ''}`,
     skipped: ['control-flow flattening'],
   };
 }

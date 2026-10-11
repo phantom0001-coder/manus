@@ -128,7 +128,7 @@ function hideNumericCallArguments(program: Program, candidates: VmCandidate[], s
     const argumentsList = node.arguments as Array<{ type?: string; value?: number }>;
     for (let index = 0; index < argumentsList.length; index += 1) {
       const argument = argumentsList[index];
-      if (argument.type !== 'NumberLiteral' || typeof argument.value !== 'number') continue;
+      if (argument.type !== 'NumberLiteral' || typeof argument.value !== 'number' || !Number.isInteger(argument.value)) continue;
       const offset = base + count * 37;
       const encoded = argument.value + offset;
       argumentsList[index] = parseExpressionFromSource(`${helper}(${encoded},${offset})`) as typeof argument;

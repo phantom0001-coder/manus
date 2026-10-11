@@ -4,8 +4,8 @@ export interface VmCandidate {
   functionBody: FunctionBody;
   parameterNames: string[];
   functionName?: string;
-  kind: 'expression' | 'branch';
-  reason: 'single-return-arithmetic' | 'pure-branch';
+  kind: 'expression' | 'branch' | 'loop';
+  reason: 'single-return-arithmetic' | 'pure-branch' | 'pure-numeric-loop';
 }
 
 function isExpressionSafe(expression: Expression, parameters: Set<string>): boolean {
@@ -69,9 +69,30 @@ export function findVmCandidates(program: Program): VmCandidate[] {
     candidates.push({ functionBody: node, parameterNames, kind: 'branch', reason: 'pure-branch' });
   });
   walk(program, (node) => {
+    if (node.type !== 'FunctionBody' || node.body.statements.length !== 3) return;
+    const [init, loop, returned] = node.body.statements;
+    if (init.type !== 'LocalStatement' || init.names.length !== 1 || init.init.length !== 1
+      || init.init[0].type !== 'NumberLiteral' || init.init[0].value !== 0) return;
+    if (loop.type !== 'NumericForStatement' || returned.type !== 'ReturnStatement' || returned.arguments.length !== 1) return;
+    const accumulator = init.names[0].name;
+    if (returned.arguments[0].type !== 'Identifier' || returned.arguments[0].name !== accumulator) return;
+    if (loop.start.type !== 'NumberLiteral' || !Number.isInteger(loop.start.value)) return;
+    if (loop.end.type !== 'Identifier' || !parametersFor(node).has(loop.end.name)) return;
+    if (loop.body.statements.length !== 1) return;
+    const body = loop.body.statements[0];
+    if (body.type !== 'CompoundAssignmentStatement' || body.operator !== '+='
+      || body.target.type !== 'Identifier' || body.target.name !== accumulator
+      || body.value.type !== 'Identifier' || body.value.name !== loop.variable.name) return;
+    candidates.push({ functionBody: node, parameterNames: node.params.map((parameter) => parameter.name), kind: 'loop', reason: 'pure-numeric-loop' });
+  });
+  walk(program, (node) => {
     if (node.type !== 'LocalFunctionStatement') return;
     const candidate = candidates.find((item) => item.functionBody === node.func);
     if (candidate) candidate.functionName = node.name.name;
   });
   return candidates;
+}
+
+function parametersFor(node: FunctionBody): Set<string> {
+  return new Set(node.params.map((parameter) => parameter.name));
 }

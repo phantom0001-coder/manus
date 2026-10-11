@@ -5,7 +5,7 @@ type Instruction = [number, number, number?, number?, number?];
 const MODULUS = 251;
 
 function opcodeMap(seed: number) {
-  const values = [11, 23, 37, 53, 71, 89, 107, 131, 149, 167, 181, 193];
+  const values = [11, 23, 37, 53, 71, 89, 107, 131, 149, 167, 181, 193, 211];
   const rotate = Math.abs(seed) % values.length;
   const rotated = values.slice(rotate).concat(values.slice(0, rotate));
   const mul = [3, 5, 7, 11, 13, 17, 19][Math.abs(seed) % 7];
@@ -22,6 +22,7 @@ function opcodeMap(seed: number) {
     fakeC: rotated[8],
     compare: rotated[9],
     select: rotated[10],
+    rangeAdd: rotated[11],
     mul,
     add,
     mutationMul: 29,
@@ -99,6 +100,8 @@ function encode(code: Instruction[], map: ReturnType<typeof opcodeMap>, resultRe
       emit([map.compare, a, b ?? 0, c ?? 0, kind ?? 1]);
     } else if (op === 12) {
       emit([map.select, a, b ?? 0, c ?? 0, kind ?? 0]);
+    } else if (op === 13) {
+      emit([map.rangeAdd, a, b ?? 0, c ?? 0, kind ?? 1]);
     } else if (op === 99) emit([map.ret, resultRegister]);
     else throw new Error(`Unknown VM opcode ${op}`);
   }
@@ -114,13 +117,21 @@ function lowerCandidate(candidate: VmCandidate, seed: number): string {
   let result: number;
   if (candidate.kind === 'expression') {
     result = compileExpression(statement.arguments[0], params, code, next);
-  } else {
+  } else if (candidate.kind === 'branch') {
     const clause = statement.clauses[0];
     const condition = compileComparison(clause.condition, params, code, next);
     const whenTrue = compileExpression(clause.body.statements[0].arguments[0], params, code, next);
     const whenFalse = compileExpression(statement.alternate.statements[0].arguments[0], params, code, next);
     result = next.value++;
     code.push([12, result, condition, whenTrue, whenFalse]);
+  } else {
+    const loop = candidate.functionBody.body.statements[1] as any;
+    const endRegister = next.value++;
+    const endIndex = params.get(loop.end.name);
+    if (endIndex === undefined) throw new Error('Loop candidate end is not a parameter');
+    code.push([1, endRegister, endIndex]);
+    result = next.value++;
+    code.push([13, result, endRegister, loop.start.value, 1]);
   }
   code.push([99, result]);
   const instructions = encode(code, map, result);
@@ -228,6 +239,17 @@ function renderDispatcher(map: ReturnType<typeof opcodeMap>): string {
             local whenTrue = registers[d(i[4], pc - 1)]
             local whenFalse = registers[d(i[5], pc - 1)]
             registers[dst] = condition ~= 0 and whenTrue or whenFalse
+        elseif op == ${map.rangeAdd} then
+            local dst = d(i[2], pc - 1)
+            local limit = registers[d(i[3], pc - 1)]
+            local current = d(i[4], pc - 1)
+            local step = d(i[5], pc - 1)
+            local total = 0
+            while current <= limit do
+                total += current
+                current += step
+            end
+            registers[dst] = total
         elseif op == ${map.ret} then
             return registers[d(i[2], pc - 1)]
         end
@@ -245,9 +267,14 @@ export function lowerVmCandidates(program: Program, seed: number): { lowered: nu
     const statement = candidate.functionBody.body.statements[0] as any;
     if (candidate.kind === 'expression') {
       statement.arguments[0] = parseExpressionFromSource(lowerCandidate(candidate, dispatcherSeeds[index]));
-    } else {
+    } else if (candidate.kind === 'branch') {
       statement.type = 'ReturnStatement';
       statement.arguments = [parseExpressionFromSource(lowerCandidate(candidate, dispatcherSeeds[index]))];
+    } else {
+      candidate.functionBody.body.statements = [{
+        type: 'ReturnStatement',
+        arguments: [parseExpressionFromSource(lowerCandidate(candidate, dispatcherSeeds[index]))],
+      }] as any;
     }
   }
   const numeric = hideNumericCallArguments(program, candidates, seed);

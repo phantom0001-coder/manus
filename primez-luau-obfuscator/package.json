@@ -1,0 +1,22 @@
+{
+  "name": "primez-luau-obfuscator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Luau-first source protection prototype with compatibility-aware transforms.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/cli.js",
+    "test": "npm run build && node --test test/*.test.js",
+    "audit": "npm run build && node test/adversarial-audit.mjs"
+  },
+  "dependencies": {
+    "@roblox-ts/luau-ast": "2.1.2",
+    "commander": "14.0.1",
+    "luau-parser": "1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.0",
+    "typescript": "5.8.3"
+  }
+}

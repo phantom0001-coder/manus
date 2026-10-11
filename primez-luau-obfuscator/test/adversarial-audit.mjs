@@ -25,7 +25,7 @@ function deobfuscateNames(source) {
 
 function deobfuscateStrings(source) {
   let count = 0;
-  const recovered = source.replace(/__p_decode\(\{([\d\s,]+)\},\s*(\d+)\s*,\s*(\d+)\)/g, (_, rawBytes, rawKey, rawStep) => {
+  const recovered = source.replace(/__s_[A-Za-z0-9_]+\(\{([\d\s,]+)\},\s*(\d+)\s*,\s*(\d+)\)/g, (_, rawBytes, rawKey, rawStep) => {
     const key = Number(rawKey);
     const step = Number(rawStep);
     const bytes = rawBytes.split(',').map((value) => Number(value.trim())).filter(Number.isFinite);

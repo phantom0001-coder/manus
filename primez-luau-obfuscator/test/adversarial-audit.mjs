@@ -23,6 +23,17 @@ function deobfuscateNames(source) {
   return { source: result, mapping };
 }
 
+function deobfuscateStrings(source) {
+  let count = 0;
+  const recovered = source.replace(/__p_decode\(\{([\d\s,]+)\},\s*(\d+)\)/g, (_, rawBytes, rawKey) => {
+    const key = Number(rawKey);
+    const bytes = rawBytes.split(',').map((value) => Number(value.trim())).filter(Number.isFinite);
+    count += 1;
+    return JSON.stringify(Buffer.from(bytes.map((value) => value ^ key)).toString('utf8'));
+  });
+  return { source: recovered, count };
+}
+
 await mkdir(work, { recursive: true });
 const results = [];
 for (const [name, source] of Object.entries(cases)) {
@@ -34,15 +45,19 @@ for (const [name, source] of Object.entries(cases)) {
   const protectedSource = await readFile(output, 'utf8');
   parse(protectedSource);
   const recovered = deobfuscateNames(protectedSource);
-  parse(recovered.source);
+  const recoveredStrings = deobfuscateStrings(recovered.source);
+  parse(recoveredStrings.source);
   results.push({
     name,
     parsedProtected: true,
     parsedAfterNameRecovery: true,
     renamedIdentifiers: recovered.mapping.size,
+    recoveredStrings: recoveredStrings.count,
     compatibility: inspect.match(/compatibility: ([A-Z-]+)/)?.[1] ?? 'UNKNOWN',
-    note: recovered.mapping.size ? 'identifier layer is trivially reversible by normalization' : 'no private identifiers transformed',
+    note: recovered.mapping.size || recoveredStrings.count
+      ? 'current name/string layers are statically reversible; VM and CFG layers remain pending'
+      : 'no private identifiers or strings transformed',
   });
 }
-console.log(JSON.stringify({ cases: results, conclusion: 'Current MVP survives parser-level corpus checks but identifier-only protection is trivially deobfuscated; VM/string/CFG layers are not production-ready.' }, null, 2));
+console.log(JSON.stringify({ cases: results, conclusion: 'Current MVP passes parser/runtime compatibility checks, but name and string layers are statically reversible; VM and CFG layers are not production-ready.' }, null, 2));
 await rm(work, { recursive: true, force: true });

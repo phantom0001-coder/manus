@@ -59,8 +59,8 @@ export function classifyCompatibility(source: string, program: Program): Compati
   return {
     status,
     findings,
-    supportedTransforms: ['scope-aware identifier mangling', 'Luau AST round-trip'],
-    skippedTransforms: ['string encoding', 'control-flow flattening', 'VM lowering'],
+    supportedTransforms: ['scope-aware identifier mangling', 'balanced string encoding', 'Luau AST round-trip'],
+    skippedTransforms: ['control-flow flattening', 'VM lowering'],
   };
 }
 
@@ -68,9 +68,10 @@ export function getScopeAnalysis(program: Program) {
   return analyzeScopes(program, { builtinGlobals: ROBLOX_BUILTINS });
 }
 
-export function renderLuau(program: Program, directives: string[]): string {
+export function renderLuau(program: Program, directives: string[], prelude = ''): string {
   const body = print(program);
-  return directives.length ? `${directives.join('\n')}\n${body}\n` : `${body}\n`;
+  const header = directives.length ? `${directives.join('\n')}\n` : '';
+  return `${header}${prelude}${body}\n`;
 }
 
 export function extractDirectives(source: string): string[] {

@@ -41,10 +41,10 @@ cli.command('build <input> <output>')
     const report = classifyCompatibility(source, program);
     const seed = Number.parseInt(options.seed, 10);
     if (!Number.isSafeInteger(seed)) throw new Error('seed must be a safe integer');
-    const result = applySafeTransforms(program, seed);
-    await writeFile(output, renderLuau(result.program, directives), 'utf8');
+    const result = applySafeTransforms(program, seed, options.profile);
+    await writeFile(output, renderLuau(result.program, directives, result.prelude), 'utf8');
     console.log(`built ${output}`);
-    console.log(`profile: ${options.profile}; renamed bindings: ${result.renamed}`);
+    console.log(`profile: ${options.profile}; renamed bindings: ${result.renamed}; encoded strings: ${result.encodedStrings}`);
     printReport({ ...report, skippedTransforms: result.skipped });
   });
 

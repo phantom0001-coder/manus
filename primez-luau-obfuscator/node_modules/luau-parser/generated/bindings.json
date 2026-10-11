@@ -1,0 +1,4493 @@
+[
+    {
+        "id": 0,
+        "name": "game",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 1,
+        "name": "script",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 2,
+        "name": "workspace",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 3,
+        "name": "print",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 26,
+        "referenceLocations": [
+            {
+                "line": 244,
+                "column": 2
+            },
+            {
+                "line": 248,
+                "column": 2
+            },
+            {
+                "line": 250,
+                "column": 2
+            },
+            {
+                "line": 254,
+                "column": 2
+            },
+            {
+                "line": 256,
+                "column": 2
+            },
+            {
+                "line": 258,
+                "column": 2
+            },
+            {
+                "line": 260,
+                "column": 2
+            },
+            {
+                "line": 281,
+                "column": 2
+            },
+            {
+                "line": 289,
+                "column": 3
+            },
+            {
+                "line": 318,
+                "column": 2
+            },
+            {
+                "line": 322,
+                "column": 2
+            },
+            {
+                "line": 326,
+                "column": 2
+            },
+            {
+                "line": 334,
+                "column": 2
+            },
+            {
+                "line": 352,
+                "column": 2
+            },
+            {
+                "line": 370,
+                "column": 2
+            },
+            {
+                "line": 380,
+                "column": 4
+            },
+            {
+                "line": 398,
+                "column": 1
+            },
+            {
+                "line": 399,
+                "column": 1
+            },
+            {
+                "line": 400,
+                "column": 1
+            },
+            {
+                "line": 408,
+                "column": 20
+            },
+            {
+                "line": 414,
+                "column": 19
+            },
+            {
+                "line": 929,
+                "column": 1
+            },
+            {
+                "line": 1076,
+                "column": 2
+            },
+            {
+                "line": 1078,
+                "column": 2
+            },
+            {
+                "line": 1136,
+                "column": 2
+            },
+            {
+                "line": 1174,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "warn",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 5,
+        "name": "error",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 941,
+                "column": 3
+            },
+            {
+                "line": 963,
+                "column": 3
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "pairs",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 7,
+        "name": "ipairs",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 4,
+        "referenceLocations": [
+            {
+                "line": 333,
+                "column": 21
+            },
+            {
+                "line": 351,
+                "column": 21
+            },
+            {
+                "line": 579,
+                "column": 18
+            },
+            {
+                "line": 1135,
+                "column": 21
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "next",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 9,
+        "name": "type",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 955,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "typeof",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 11,
+        "name": "tostring",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 538,
+                "column": 9
+            },
+            {
+                "line": 944,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "name": "tonumber",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 13,
+        "name": "require",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 14,
+        "name": "unpack",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 15,
+        "name": "select",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 16,
+        "name": "assert",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 954,
+                "column": 1
+            },
+            {
+                "line": 955,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "name": "pcall",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 935,
+                "column": 25
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "name": "xpcall",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 939,
+                "column": 27
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "name": "table",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 580,
+                "column": 3
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "name": "string",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 21,
+        "name": "math",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 22,
+        "name": "os",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 23,
+        "name": "coroutine",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 24,
+        "name": "task",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 25,
+        "name": "Instance",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 26,
+        "name": "Vector3",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 27,
+        "name": "CFrame",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 28,
+        "name": "Color3",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 29,
+        "name": "UDim2",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 30,
+        "name": "Enum",
+        "kind": "global",
+        "isBuiltin": true,
+        "declaredAt": null,
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 31,
+        "name": "nilValue",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 7,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 32,
+        "name": "booleanValue",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 8,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 33,
+        "name": "falseValue",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 9,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 34,
+        "name": "integer",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 11,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 35,
+        "name": "negative",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 12,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 36,
+        "name": "decimal",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 13,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 37,
+        "name": "exponent",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 14,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 38,
+        "name": "hex",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 16,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 39,
+        "name": "binary",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 17,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 40,
+        "name": "separatedInteger",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 19,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 41,
+        "name": "separatedHex",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 20,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 42,
+        "name": "separatedBinary",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 21,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 43,
+        "name": "stringValue",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 23,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 44,
+        "name": "singleQuoted",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 24,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 45,
+        "name": "longString",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 26,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 46,
+        "name": "escaped",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 31,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 47,
+        "name": "name",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 37,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 48,
+        "name": "version",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 38,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 1,
+                "column": 1
+            },
+            {
+                "line": 1,
+                "column": 4
+            }
+        ]
+    },
+    {
+        "id": 49,
+        "name": "interpolated",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 40,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 50,
+        "name": "interpolatedExpression",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 41,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 51,
+        "name": "nestedInterpolation",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 42,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 52,
+        "name": "add",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 48,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 53,
+        "name": "subtract",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 49,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 54,
+        "name": "multiply",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 50,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 55,
+        "name": "divide",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 51,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 56,
+        "name": "floorDivide",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 52,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 57,
+        "name": "modulo",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 53,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 58,
+        "name": "power",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 54,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 59,
+        "name": "concat",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 55,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 60,
+        "name": "equal",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 57,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 61,
+        "name": "notEqual",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 58,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 62,
+        "name": "less",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 59,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 63,
+        "name": "lessEqual",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 60,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 64,
+        "name": "greater",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 61,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 65,
+        "name": "greaterEqual",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 62,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 66,
+        "name": "logicalAnd",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 64,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 67,
+        "name": "logicalOr",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 65,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 68,
+        "name": "logicalNot",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 66,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 69,
+        "name": "length",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 68,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 70,
+        "name": "compound",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 74,
+            "column": 7
+        },
+        "referenceCount": 8,
+        "referenceLocations": [
+            {
+                "line": 76,
+                "column": 1
+            },
+            {
+                "line": 77,
+                "column": 1
+            },
+            {
+                "line": 78,
+                "column": 1
+            },
+            {
+                "line": 79,
+                "column": 1
+            },
+            {
+                "line": 80,
+                "column": 1
+            },
+            {
+                "line": 81,
+                "column": 1
+            },
+            {
+                "line": 82,
+                "column": 1
+            },
+            {
+                "line": 83,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 71,
+        "name": "a",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 89,
+            "column": 7
+        },
+        "referenceCount": 6,
+        "referenceLocations": [
+            {
+                "line": 253,
+                "column": 4
+            },
+            {
+                "line": 255,
+                "column": 8
+            },
+            {
+                "line": 257,
+                "column": 8
+            },
+            {
+                "line": 269,
+                "column": 25
+            },
+            {
+                "line": 269,
+                "column": 48
+            },
+            {
+                "line": 272,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 72,
+        "name": "b",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 90,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 73,
+        "name": "c",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 90,
+            "column": 10
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 74,
+        "name": "d",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 91,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 75,
+        "name": "e",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 92,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 76,
+        "name": "f",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 92,
+            "column": 10
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 77,
+        "name": "g",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 93,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 78,
+        "name": "h",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 93,
+            "column": 10
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 79,
+        "name": "i",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 93,
+            "column": 13
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 80,
+        "name": "emptyTable",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 98,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 81,
+        "name": "array",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 100,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 333,
+                "column": 28
+            }
+        ]
+    },
+    {
+        "id": 82,
+        "name": "recordTable",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 107,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 83,
+        "name": "explicitStringKey",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 112,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 84,
+        "name": "computedStringKey",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 116,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 85,
+        "name": "explicitNumberKey",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 120,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 86,
+        "name": "nestedTable",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 124,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 87,
+        "name": "noArguments",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 142,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 88,
+        "name": "oneArgument",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 146,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 89,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 146,
+            "column": 28
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 147,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 90,
+        "name": "multipleArguments",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 150,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 91,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 150,
+            "column": 34
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 151,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 92,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 150,
+            "column": 37
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 151,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 93,
+        "name": "c",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 150,
+            "column": 40
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 151,
+                "column": 17
+            }
+        ]
+    },
+    {
+        "id": 94,
+        "name": "multipleReturns",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 154,
+            "column": 16
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 159,
+                "column": 18
+            },
+            {
+                "line": 392,
+                "column": 20
+            }
+        ]
+    },
+    {
+        "id": 95,
+        "name": "ignoredReturn",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 158,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 96,
+        "name": "x",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 159,
+            "column": 8
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 161,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 97,
+        "name": "y",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 159,
+            "column": 11
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 161,
+                "column": 12
+            }
+        ]
+    },
+    {
+        "id": 98,
+        "name": "z",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 159,
+            "column": 14
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 161,
+                "column": 15
+            }
+        ]
+    },
+    {
+        "id": 99,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 168,
+            "column": 28
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 169,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 100,
+        "name": "anonymous",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 168,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 402,
+                "column": 20
+            },
+            {
+                "line": 425,
+                "column": 25
+            }
+        ]
+    },
+    {
+        "id": 101,
+        "name": "makeMultiplier",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 172,
+            "column": 16
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 178,
+                "column": 16
+            },
+            {
+                "line": 179,
+                "column": 19
+            }
+        ]
+    },
+    {
+        "id": 102,
+        "name": "multiplier",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 172,
+            "column": 31
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 174,
+                "column": 18
+            }
+        ]
+    },
+    {
+        "id": 103,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 173,
+            "column": 18
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 174,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 104,
+        "name": "double",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 178,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 105,
+        "name": "quadruple",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 179,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 106,
+        "name": "object",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 185,
+            "column": 7
+        },
+        "referenceCount": 6,
+        "referenceLocations": [
+            {
+                "line": 189,
+                "column": 10
+            },
+            {
+                "line": 193,
+                "column": 10
+            },
+            {
+                "line": 197,
+                "column": 10
+            },
+            {
+                "line": 202,
+                "column": 1
+            },
+            {
+                "line": 203,
+                "column": 1
+            },
+            {
+                "line": 400,
+                "column": 7
+            }
+        ]
+    },
+    {
+        "id": 107,
+        "name": "self",
+        "kind": "self",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 189,
+            "column": 10
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 190,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 108,
+        "name": "self",
+        "kind": "self",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 193,
+            "column": 10
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 194,
+                "column": 2
+            }
+        ]
+    },
+    {
+        "id": 109,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 193,
+            "column": 26
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 194,
+                "column": 15
+            }
+        ]
+    },
+    {
+        "id": 110,
+        "name": "self",
+        "kind": "self",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 197,
+            "column": 10
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 198,
+                "column": 2
+            },
+            {
+                "line": 199,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 111,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 197,
+            "column": 21
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 198,
+                "column": 16
+            }
+        ]
+    },
+    {
+        "id": 112,
+        "name": "calculator",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 209,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 211,
+                "column": 10
+            },
+            {
+                "line": 215,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 113,
+        "name": "self",
+        "kind": "self",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 211,
+            "column": 10
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 114,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 211,
+            "column": 25
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 212,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 115,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 211,
+            "column": 28
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 212,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 116,
+        "name": "self",
+        "kind": "self",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 215,
+            "column": 10
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 117,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 215,
+            "column": 30
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 216,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 118,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 215,
+            "column": 33
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 216,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 119,
+        "name": "module",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 223,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 229,
+                "column": 10
+            },
+            {
+                "line": 233,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 120,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 229,
+            "column": 32
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 230,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 121,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 233,
+            "column": 32
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 234,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 122,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 233,
+            "column": 35
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 234,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 123,
+        "name": "condition",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 241,
+            "column": 7
+        },
+        "referenceCount": 4,
+        "referenceLocations": [
+            {
+                "line": 243,
+                "column": 4
+            },
+            {
+                "line": 247,
+                "column": 4
+            },
+            {
+                "line": 267,
+                "column": 19
+            },
+            {
+                "line": 271,
+                "column": 31
+            }
+        ]
+    },
+    {
+        "id": 124,
+        "name": "result",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 267,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 125,
+        "name": "numberResult",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 269,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 126,
+        "name": "nestedIfExpression",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 271,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 127,
+        "name": "scoped",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 280,
+            "column": 8
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 281,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 128,
+        "name": "x",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 285,
+            "column": 8
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 289,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 129,
+        "name": "y",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 288,
+            "column": 9
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 289,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 130,
+        "name": "counter",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 297,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 299,
+                "column": 7
+            },
+            {
+                "line": 300,
+                "column": 2
+            }
+        ]
+    },
+    {
+        "id": 131,
+        "name": "repeatCounter",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 307,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 310,
+                "column": 2
+            },
+            {
+                "line": 311,
+                "column": 7
+            }
+        ]
+    },
+    {
+        "id": 132,
+        "name": "index",
+        "kind": "for-numeric",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 317,
+            "column": 5
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 318,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 133,
+        "name": "index",
+        "kind": "for-numeric",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 321,
+            "column": 5
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 322,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 134,
+        "name": "index",
+        "kind": "for-numeric",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 325,
+            "column": 5
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 326,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 135,
+        "name": "index",
+        "kind": "for-generic",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 333,
+            "column": 5
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 334,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 136,
+        "name": "value",
+        "kind": "for-generic",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 333,
+            "column": 12
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 334,
+                "column": 15
+            }
+        ]
+    },
+    {
+        "id": 137,
+        "name": "entries",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 345,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 351,
+                "column": 28
+            }
+        ]
+    },
+    {
+        "id": 138,
+        "name": "index",
+        "kind": "for-generic",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 351,
+            "column": 5
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 352,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 139,
+        "name": "entry",
+        "kind": "for-generic",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 351,
+            "column": 12
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 352,
+                "column": 15
+            },
+            {
+                "line": 352,
+                "column": 27
+            }
+        ]
+    },
+    {
+        "id": 140,
+        "name": "i",
+        "kind": "for-numeric",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 359,
+            "column": 5
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 360,
+                "column": 5
+            }
+        ]
+    },
+    {
+        "id": 141,
+        "name": "i",
+        "kind": "for-numeric",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 365,
+            "column": 5
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 366,
+                "column": 5
+            },
+            {
+                "line": 370,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 142,
+        "name": "i",
+        "kind": "for-numeric",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 377,
+            "column": 5
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 379,
+                "column": 6
+            },
+            {
+                "line": 380,
+                "column": 22
+            }
+        ]
+    },
+    {
+        "id": 143,
+        "name": "j",
+        "kind": "for-numeric",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 378,
+            "column": 6
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 379,
+                "column": 11
+            },
+            {
+                "line": 380,
+                "column": 25
+            }
+        ]
+    },
+    {
+        "id": 144,
+        "name": "x1",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 389,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 390,
+                "column": 14
+            },
+            {
+                "line": 390,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 145,
+        "name": "x2",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 389,
+            "column": 11
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 390,
+                "column": 10
+            },
+            {
+                "line": 390,
+                "column": 5
+            }
+        ]
+    },
+    {
+        "id": 146,
+        "name": "r1",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 392,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 147,
+        "name": "r2",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 392,
+            "column": 11
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 148,
+        "name": "r3",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 392,
+            "column": 15
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 149,
+        "name": "callResult",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 402,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 150,
+        "name": "stringCall",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 408,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 151,
+        "name": "tableCall",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 414,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 152,
+        "name": "grouped",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 423,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 153,
+        "name": "functionResult",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 425,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 154,
+        "name": "typedNumber",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 526,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 155,
+        "name": "typedString",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 527,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 156,
+        "name": "typedBoolean",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 528,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 157,
+        "name": "typedArray",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 530,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 158,
+        "name": "typedPoint",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 532,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 159,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 537,
+            "column": 42
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 538,
+                "column": 18
+            }
+        ]
+    },
+    {
+        "id": 160,
+        "name": "typedCallback",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 537,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 161,
+        "name": "typedIdentity",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 545,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 162,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 545,
+            "column": 30
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 546,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 163,
+        "name": "addNumbers",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 549,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 164,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 549,
+            "column": 27
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 550,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 165,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 549,
+            "column": 38
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 550,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 166,
+        "name": "createPoint",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 553,
+            "column": 16
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 659,
+                "column": 23
+            }
+        ]
+    },
+    {
+        "id": 167,
+        "name": "x",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 553,
+            "column": 28
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 555,
+                "column": 7
+            }
+        ]
+    },
+    {
+        "id": 168,
+        "name": "y",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 553,
+            "column": 39
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 556,
+                "column": 7
+            }
+        ]
+    },
+    {
+        "id": 169,
+        "name": "greet",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 564,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 170,
+        "name": "name",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 564,
+            "column": 22
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 565,
+                "column": 5
+            },
+            {
+                "line": 1,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 171,
+        "name": "collect",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 576,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 172,
+        "name": "result",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 577,
+            "column": 8
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 580,
+                "column": 16
+            },
+            {
+                "line": 583,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 173,
+        "name": "_",
+        "kind": "for-generic",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 579,
+            "column": 6
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 174,
+        "name": "value",
+        "kind": "for-generic",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 579,
+            "column": 9
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 580,
+                "column": 24
+            }
+        ]
+    },
+    {
+        "id": 175,
+        "name": "identity",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 607,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 176,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 607,
+            "column": 28
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 608,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 177,
+        "name": "makePair",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 611,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 178,
+        "name": "first",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 611,
+            "column": 28
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 613,
+                "column": 11
+            }
+        ]
+    },
+    {
+        "id": 179,
+        "name": "second",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 611,
+            "column": 38
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 614,
+                "column": 12
+            }
+        ]
+    },
+    {
+        "id": 180,
+        "name": "first",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 618,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 181,
+        "name": "values",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 618,
+            "column": 25
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 619,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 182,
+        "name": "passthrough",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 632,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 183,
+        "name": "unknownValue",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 640,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 642,
+                "column": 22
+            },
+            {
+                "line": 644,
+                "column": 23
+            }
+        ]
+    },
+    {
+        "id": 184,
+        "name": "castedString",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 642,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 185,
+        "name": "castedNumber",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 644,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 186,
+        "name": "runtimeValue",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 650,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 187,
+        "name": "inferredPoint",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 659,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 660,
+                "column": 22
+            }
+        ]
+    },
+    {
+        "id": 188,
+        "name": "inferredType",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 660,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 189,
+        "name": "users",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 669,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 190,
+        "name": "width",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 686,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 191,
+        "name": "height",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 686,
+            "column": 22
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 192,
+        "name": "constantNumber",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 692,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 193,
+        "name": "constantString",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 693,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 194,
+        "name": "constantTable",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 695,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 195,
+        "name": "constA",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 701,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 196,
+        "name": "constB",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 701,
+            "column": 15
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 197,
+        "name": "constantFunction",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 707,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 198,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 707,
+            "column": 33
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 708,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 199,
+        "name": "oldFunction",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 743,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 200,
+        "name": "nativeCandidate",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 748,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 201,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 748,
+            "column": 32
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 749,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 202,
+        "name": "deprecatedFunction",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 757,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 203,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 757,
+            "column": 35
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 758,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 204,
+        "name": "attributedObject",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 765,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 768,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 205,
+        "name": "self",
+        "kind": "self",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 768,
+            "column": 10
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 206,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 768,
+            "column": 37
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 769,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 207,
+        "name": "makeCounter",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 776,
+            "column": 16
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 785,
+                "column": 25
+            }
+        ]
+    },
+    {
+        "id": 208,
+        "name": "value",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 777,
+            "column": 8
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 780,
+                "column": 3
+            },
+            {
+                "line": 781,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 209,
+        "name": "counterFunction",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 785,
+            "column": 7
+        },
+        "referenceCount": 3,
+        "referenceLocations": [
+            {
+                "line": 787,
+                "column": 1
+            },
+            {
+                "line": 788,
+                "column": 1
+            },
+            {
+                "line": 789,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 210,
+        "name": "outer",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 795,
+            "column": 16
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 807,
+                "column": 17
+            }
+        ]
+    },
+    {
+        "id": 211,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 795,
+            "column": 22
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 798,
+                "column": 11
+            }
+        ]
+    },
+    {
+        "id": 212,
+        "name": "middle",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 796,
+            "column": 17
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 804,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 213,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 796,
+            "column": 24
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 798,
+                "column": 15
+            }
+        ]
+    },
+    {
+        "id": 214,
+        "name": "inner",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 797,
+            "column": 18
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 801,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 215,
+        "name": "c",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 797,
+            "column": 24
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 798,
+                "column": 19
+            }
+        ]
+    },
+    {
+        "id": 216,
+        "name": "closure",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 807,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 808,
+                "column": 23
+            }
+        ]
+    },
+    {
+        "id": 217,
+        "name": "closureResult",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 808,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 218,
+        "name": "factorial",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 814,
+            "column": 16
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 819,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 219,
+        "name": "n",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 814,
+            "column": 26
+        },
+        "referenceCount": 3,
+        "referenceLocations": [
+            {
+                "line": 815,
+                "column": 5
+            },
+            {
+                "line": 819,
+                "column": 9
+            },
+            {
+                "line": 819,
+                "column": 23
+            }
+        ]
+    },
+    {
+        "id": 220,
+        "name": "isEven",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 826,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 829,
+                "column": 10
+            },
+            {
+                "line": 842,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 221,
+        "name": "isOdd",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 827,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 834,
+                "column": 9
+            },
+            {
+                "line": 837,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 222,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 829,
+            "column": 17
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 830,
+                "column": 5
+            },
+            {
+                "line": 834,
+                "column": 15
+            }
+        ]
+    },
+    {
+        "id": 223,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 837,
+            "column": 16
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 838,
+                "column": 5
+            },
+            {
+                "line": 842,
+                "column": 16
+            }
+        ]
+    },
+    {
+        "id": 224,
+        "name": "chainObject",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 849,
+            "column": 7
+        },
+        "referenceCount": 3,
+        "referenceLocations": [
+            {
+                "line": 853,
+                "column": 10
+            },
+            {
+                "line": 858,
+                "column": 10
+            },
+            {
+                "line": 863,
+                "column": 21
+            }
+        ]
+    },
+    {
+        "id": 225,
+        "name": "self",
+        "kind": "self",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 853,
+            "column": 10
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 854,
+                "column": 2
+            },
+            {
+                "line": 855,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 226,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 853,
+            "column": 31
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 854,
+                "column": 16
+            }
+        ]
+    },
+    {
+        "id": 227,
+        "name": "self",
+        "kind": "self",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 858,
+            "column": 10
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 859,
+                "column": 2
+            },
+            {
+                "line": 860,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 228,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 858,
+            "column": 36
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 859,
+                "column": 16
+            }
+        ]
+    },
+    {
+        "id": 229,
+        "name": "chainResult",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 863,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 230,
+        "name": "complex",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 872,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 883,
+                "column": 22
+            },
+            {
+                "line": 885,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 231,
+        "name": "complexValue",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 883,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 232,
+        "name": "MetaVector",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 895,
+            "column": 7
+        },
+        "referenceCount": 11,
+        "referenceLocations": [
+            {
+                "line": 896,
+                "column": 22
+            },
+            {
+                "line": 896,
+                "column": 1
+            },
+            {
+                "line": 898,
+                "column": 10
+            },
+            {
+                "line": 902,
+                "column": 5
+            },
+            {
+                "line": 905,
+                "column": 10
+            },
+            {
+                "line": 906,
+                "column": 9
+            },
+            {
+                "line": 912,
+                "column": 10
+            },
+            {
+                "line": 913,
+                "column": 9
+            },
+            {
+                "line": 919,
+                "column": 10
+            },
+            {
+                "line": 923,
+                "column": 17
+            },
+            {
+                "line": 924,
+                "column": 17
+            }
+        ]
+    },
+    {
+        "id": 233,
+        "name": "x",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 898,
+            "column": 25
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 900,
+                "column": 7
+            }
+        ]
+    },
+    {
+        "id": 234,
+        "name": "y",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 898,
+            "column": 36
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 901,
+                "column": 7
+            }
+        ]
+    },
+    {
+        "id": 235,
+        "name": "setmetatable",
+        "kind": "global",
+        "isBuiltin": false,
+        "declaredAt": null,
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 899,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 236,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 905,
+            "column": 27
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 907,
+                "column": 3
+            },
+            {
+                "line": 908,
+                "column": 3
+            }
+        ]
+    },
+    {
+        "id": 237,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 905,
+            "column": 30
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 907,
+                "column": 9
+            },
+            {
+                "line": 908,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 238,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 912,
+            "column": 27
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 914,
+                "column": 3
+            },
+            {
+                "line": 915,
+                "column": 3
+            }
+        ]
+    },
+    {
+        "id": 239,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 912,
+            "column": 30
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 914,
+                "column": 9
+            },
+            {
+                "line": 915,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 240,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 919,
+            "column": 32
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 1,
+                "column": 1
+            },
+            {
+                "line": 1,
+                "column": 1
+            }
+        ]
+    },
+    {
+        "id": 241,
+        "name": "vectorA",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 923,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 926,
+                "column": 17
+            },
+            {
+                "line": 927,
+                "column": 27
+            }
+        ]
+    },
+    {
+        "id": 242,
+        "name": "vectorB",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 924,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 926,
+                "column": 27
+            }
+        ]
+    },
+    {
+        "id": 243,
+        "name": "vectorC",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 926,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 927,
+                "column": 17
+            }
+        ]
+    },
+    {
+        "id": 244,
+        "name": "vectorD",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 927,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 929,
+                "column": 7
+            }
+        ]
+    },
+    {
+        "id": 245,
+        "name": "success",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 935,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 246,
+        "name": "result",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 935,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 247,
+        "name": "errorMessage",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 943,
+            "column": 11
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 944,
+                "column": 19
+            }
+        ]
+    },
+    {
+        "id": 248,
+        "name": "success2",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 939,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 249,
+        "name": "result2",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 939,
+            "column": 17
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 250,
+        "name": "value",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 952,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 954,
+                "column": 8
+            },
+            {
+                "line": 955,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 251,
+        "name": "requirePositive",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 961,
+            "column": 16
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 252,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 961,
+            "column": 32
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 962,
+                "column": 5
+            },
+            {
+                "line": 966,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 253,
+        "name": "maybeName",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 973,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 975,
+                "column": 21
+            },
+            {
+                "line": 976,
+                "column": 17
+            }
+        ]
+    },
+    {
+        "id": 254,
+        "name": "displayName",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 975,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 255,
+        "name": "hasName",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 976,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 256,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 983,
+            "column": 17
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 984,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 257,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 983,
+            "column": 20
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 984,
+                "column": 14
+            }
+        ]
+    },
+    {
+        "id": 258,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 987,
+            "column": 22
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 988,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 259,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 987,
+            "column": 25
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 988,
+                "column": 14
+            }
+        ]
+    },
+    {
+        "id": 260,
+        "name": "a",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 991,
+            "column": 22
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 992,
+                "column": 10
+            }
+        ]
+    },
+    {
+        "id": 261,
+        "name": "b",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 991,
+            "column": 25
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 992,
+                "column": 14
+            }
+        ]
+    },
+    {
+        "id": 262,
+        "name": "operations",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 982,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 996,
+                "column": 25
+            }
+        ]
+    },
+    {
+        "id": 263,
+        "name": "operationResult",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 996,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 264,
+        "name": "tree",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1024,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 265,
+        "name": "state",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1044,
+            "column": 7
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 1046,
+                "column": 4
+            },
+            {
+                "line": 1047,
+                "column": 2
+            }
+        ]
+    },
+    {
+        "id": 266,
+        "name": "operation",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1070,
+            "column": 7
+        },
+        "referenceCount": 3,
+        "referenceLocations": [
+            {
+                "line": 1075,
+                "column": 4
+            },
+            {
+                "line": 1076,
+                "column": 8
+            },
+            {
+                "line": 1078,
+                "column": 8
+            }
+        ]
+    },
+    {
+        "id": 267,
+        "name": "scores",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1085,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 268,
+        "name": "numberPair",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1095,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 269,
+        "name": "stringPair",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1100,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 270,
+        "name": "complexExpression",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1109,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 271,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1122,
+            "column": 22
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1123,
+                "column": 11
+            }
+        ]
+    },
+    {
+        "id": 272,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1129,
+            "column": 22
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1130,
+                "column": 11
+            }
+        ]
+    },
+    {
+        "id": 273,
+        "name": "processors",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1119,
+            "column": 7
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1135,
+                "column": 28
+            }
+        ]
+    },
+    {
+        "id": 274,
+        "name": "_",
+        "kind": "for-generic",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1135,
+            "column": 5
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 275,
+        "name": "processor",
+        "kind": "for-generic",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1135,
+            "column": 8
+        },
+        "referenceCount": 2,
+        "referenceLocations": [
+            {
+                "line": 1137,
+                "column": 3
+            },
+            {
+                "line": 1138,
+                "column": 3
+            }
+        ]
+    },
+    {
+        "id": 276,
+        "name": "getCoordinates",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1146,
+            "column": 16
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1151,
+                "column": 15
+            }
+        ]
+    },
+    {
+        "id": 277,
+        "name": "useCoordinates",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1150,
+            "column": 16
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1156,
+                "column": 24
+            }
+        ]
+    },
+    {
+        "id": 278,
+        "name": "x",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1151,
+            "column": 8
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1153,
+                "column": 9
+            }
+        ]
+    },
+    {
+        "id": 279,
+        "name": "y",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1151,
+            "column": 11
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1153,
+                "column": 17
+            }
+        ]
+    },
+    {
+        "id": 280,
+        "name": "finalX",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1156,
+            "column": 7
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 281,
+        "name": "finalY",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1156,
+            "column": 15
+        },
+        "referenceCount": 0,
+        "referenceLocations": []
+    },
+    {
+        "id": 282,
+        "name": "smokeTest",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1162,
+            "column": 16
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1174,
+                "column": 7
+            }
+        ]
+    },
+    {
+        "id": 283,
+        "name": "value",
+        "kind": "param",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1162,
+            "column": 26
+        },
+        "referenceCount": 3,
+        "referenceLocations": [
+            {
+                "line": 1163,
+                "column": 20
+            },
+            {
+                "line": 1167,
+                "column": 11
+            },
+            {
+                "line": 1168,
+                "column": 13
+            }
+        ]
+    },
+    {
+        "id": 284,
+        "name": "prefix",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1163,
+            "column": 8
+        },
+        "referenceCount": 1,
+        "referenceLocations": [
+            {
+                "line": 1166,
+                "column": 12
+            }
+        ]
+    },
+    {
+        "id": 285,
+        "name": "result",
+        "kind": "local",
+        "isBuiltin": false,
+        "declaredAt": {
+            "line": 1165,
+            "column": 8
+        },
+        "referenceCount": 3,
+        "referenceLocations": [
+            {
+                "line": 1,
+                "column": 1
+            },
+            {
+                "line": 1,
+                "column": 1
+            },
+            {
+                "line": 1,
+                "column": 1
+            }
+        ]
+    }
+]

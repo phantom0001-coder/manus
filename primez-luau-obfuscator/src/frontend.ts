@@ -15,6 +15,13 @@ const DYNAMIC_GLOBALS = new Set([
 ]);
 
 const UNSUPPORTED_MARKERS = ['__namecall', 'syn.', 'KRNL', 'Celery', 'Drawing'];
+const DYNAMIC_SOURCE_PATTERNS: Array<[RegExp, string, string]> = [
+  [/\bgame\s*:\s*HttpGet(?:Async)?\s*\(/, 'game:HttpGet', 'Remote source loading must remain on the unchanged compatibility path.'],
+  [/\bloadstring\s*\(/, 'loadstring', 'Runtime compilation cannot be safely analyzed or virtualized.'],
+  [/\bgetfenv\s*\(|\bsetfenv\s*\(/, 'environment access', 'Environment introspection can observe transformed names and must remain unchanged.'],
+  [/\b(?:request|http_request|syn\.request)\s*\(/, 'executor HTTP request', 'Executor HTTP APIs require unchanged source semantics.'],
+  [/\bDrawing\s*\.\s*new\s*\(/, 'Drawing API', 'Executor Drawing userdata must remain outside AST transforms.'],
+];
 
 export function parseLuau(source: string): Program {
   return parse(source);
@@ -51,6 +58,9 @@ export function classifyCompatibility(source: string, program: Program): Compati
 
   for (const marker of UNSUPPORTED_MARKERS) {
     if (source.includes(marker)) add('SUPPORTED-SAFE', marker, 'Pattern detected; aggressive transforms should be disabled for this file.');
+  }
+  for (const [pattern, feature, message] of DYNAMIC_SOURCE_PATTERNS) {
+    if (pattern.test(source)) add('DYNAMIC', feature, message);
   }
 
   const status = findings.some((f) => f.status === 'UNSUPPORTED')

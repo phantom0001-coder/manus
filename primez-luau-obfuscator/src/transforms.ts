@@ -3,6 +3,7 @@ import { getScopeAnalysis } from './frontend.js';
 import type { TransformProfile } from './types.js';
 import { findVmCandidates } from './vm-candidates.js';
 import { lowerVmCandidates } from './vm-lower.js';
+import type { CompatibilityStatus } from './types.js';
 
 const PUBLIC_NAMES = new Set(['init', 'new', 'start', 'stop', 'Open', 'Close', 'Destroy', 'Connect']);
 
@@ -86,6 +87,26 @@ export interface TransformResult {
   vmLowered: number;
   prelude: string;
   skipped: string[];
+}
+
+export function applyCompatibilityTransforms(
+  program: Program,
+  seed: number,
+  profile: TransformProfile,
+  compatibility: CompatibilityStatus,
+): TransformResult {
+  if (compatibility === 'DYNAMIC' || compatibility === 'UNSUPPORTED') {
+    return {
+      program,
+      renamed: 0,
+      encodedStrings: 0,
+      vmCandidates: 0,
+      vmLowered: 0,
+      prelude: '',
+      skipped: ['all transforms: dynamic or unsupported runtime boundary'],
+    };
+  }
+  return applySafeTransforms(program, seed, compatibility === 'SUPPORTED-SAFE' ? 'safe' : profile);
 }
 
 export function applySafeTransforms(program: Program, seed: number, profile: TransformProfile = 'balanced'): TransformResult {

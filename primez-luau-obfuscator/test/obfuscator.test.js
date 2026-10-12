@@ -11,6 +11,7 @@ const executorFixture = new URL('examples/executor-apis.luau', root);
 const executorMatrixFixture = new URL('examples/executor-matrix.luau', root);
 const luauSyntaxFixture = new URL('examples/luau-syntax.luau', root);
 const bundleManifest = new URL('examples/bundle-fixture/manifest.json', root);
+const externalBoundaryFixture = new URL('examples/external-boundaries.luau', root);
 const bundleOutput = new URL('.bundle-test/', root);
 const output = new URL('test-output.luau', root);
 
@@ -52,6 +53,20 @@ test('bundles static relative modules without encoding require specifiers', asyn
   assert.match(bundledEntry, /require\("\.\/helper"\)/);
   assert.match(bundledHelper, /return/);
   await rm(bundleOutput, { recursive: true, force: true });
+});
+
+test('keeps remote-loader and executor-boundary scripts unchanged', async () => {
+  const inspect = execFileSync(process.execPath, [cli.pathname, 'inspect', externalBoundaryFixture.pathname], { encoding: 'utf8' });
+  assert.match(inspect, /compatibility: DYNAMIC/);
+  assert.match(inspect, /game:HttpGet/);
+  assert.match(inspect, /environment access/);
+  execFileSync(process.execPath, [cli.pathname, 'build', externalBoundaryFixture.pathname, output.pathname, '--profile', 'balanced', '--seed', '456'], { encoding: 'utf8' });
+  const protectedSource = await readFile(output, 'utf8');
+  assert.doesNotMatch(protectedSource, /__p_|__s_|local function _p/);
+  assert.match(protectedSource, /loadstring\(game:HttpGet\(url\)\)/);
+  assert.match(protectedSource, /getfenv\(2\)/);
+  assert.match(protectedSource, /https:\/\/example\.invalid\/remote\.luau/);
+  await rm(output, { force: true });
 });
 
 test('VM candidate analysis is conservative around Roblox-boundary calls', () => {

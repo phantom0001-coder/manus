@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, extname, join, relative, resolve, sep } from 'node:path';
 import { classifyCompatibility, extractDirectives, parseLuau, renderLuau } from './frontend.js';
-import { applySafeTransforms } from './transforms.js';
+import { applyCompatibilityTransforms } from './transforms.js';
 import { scanForSecrets } from './secrets.js';
 import type { CompatibilityReport, TransformProfile } from './types.js';
 
@@ -128,7 +128,7 @@ export async function buildBundle(manifest: BundleManifest, manifestPath: string
       if (secrets.length && profile === 'maximum') {
         throw new Error(`bundle module ${relativePath} contains credential-like material; remove it or exclude the module`);
       }
-      const result = applySafeTransforms(parsed, seed, profile);
+      const result = applyCompatibilityTransforms(parsed, seed, profile, compatibility.status);
       await mkdir(dirname(outputPath), { recursive: true });
       await writeFile(outputPath, renderLuau(result.program, extractDirectives(source), result.prelude), 'utf8');
     }

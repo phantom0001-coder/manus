@@ -2,7 +2,7 @@ import { Command } from 'commander';
 import { readFile, writeFile } from 'node:fs/promises';
 import { buildBundle } from './bundle.js';
 import { classifyCompatibility, extractDirectives, parseLuau, renderLuau } from './frontend.js';
-import { applySafeTransforms } from './transforms.js';
+import { applyCompatibilityTransforms } from './transforms.js';
 import { scanForSecrets } from './secrets.js';
 import type { TransformProfile } from './types.js';
 
@@ -49,7 +49,7 @@ cli.command('build <input> <output>')
     const report = classifyCompatibility(source, program);
     const seed = Number.parseInt(options.seed, 10);
     if (!Number.isSafeInteger(seed)) throw new Error('seed must be a safe integer');
-    const result = applySafeTransforms(program, seed, options.profile);
+    const result = applyCompatibilityTransforms(program, seed, options.profile, report.status);
     await writeFile(output, renderLuau(result.program, directives, result.prelude), 'utf8');
     console.log(`built ${output}`);
     console.log(`profile: ${options.profile}; renamed bindings: ${result.renamed}; encoded strings: ${result.encodedStrings}; VM candidates: ${result.vmCandidates}; VM lowered: ${result.vmLowered}`);

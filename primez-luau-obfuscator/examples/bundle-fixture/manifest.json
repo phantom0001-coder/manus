@@ -1,0 +1,8 @@
+{
+  "entry": "main.luau",
+  "modules": ".",
+  "target": "roblox-luau",
+  "profile": "balanced",
+  "seed": 20261125,
+  "preserveExports": true
+}

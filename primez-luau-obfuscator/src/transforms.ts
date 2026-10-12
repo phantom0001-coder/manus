@@ -24,13 +24,13 @@ export function manglePrivateBindings(program: Program, seed: number): number {
   return index;
 }
 
-function rewriteStrings(value: unknown, key: number, step: number, decoder: string, state: { count: number }): number {
+function rewriteStrings(value: unknown, key: number, step: number, decoder: string, state: { count: number }, preserveString = false): number {
   if (!value || typeof value !== 'object') return 0;
   if (Array.isArray(value)) {
     let count = 0;
     for (let index = 0; index < value.length; index += 1) {
       const item = value[index] as { type?: string; value?: string } | undefined;
-      if (item?.type === 'StringLiteral') {
+      if (item?.type === 'StringLiteral' && !preserveString) {
         const itemKey = (key + state.count * 17) % 251;
         const itemStep = ((step + state.count * 3) % 31) + 5;
         const bytes = [...Buffer.from(item.value ?? '', 'utf8')].map((byte, offset) => (byte + itemKey + offset * itemStep) % 256);
@@ -38,7 +38,7 @@ function rewriteStrings(value: unknown, key: number, step: number, decoder: stri
         state.count += 1;
         count += 1;
       } else {
-        count += rewriteStrings(item, key, step, decoder, state);
+        count += rewriteStrings(item, key, step, decoder, state, preserveString);
       }
     }
     return count;
@@ -47,10 +47,13 @@ function rewriteStrings(value: unknown, key: number, step: number, decoder: stri
   const node = value as Record<string, unknown>;
   if (node.type === 'StringLiteral') return 0;
   let count = 0;
+  const isRequireCall = node.type === 'CallExpression'
+    && (node.callee as { type?: string; name?: string } | undefined)?.type === 'Identifier'
+    && (node.callee as { name?: string }).name === 'require';
   for (const [name, child] of Object.entries(node)) {
     if (name === 'line' || name === 'column') continue;
     const item = child as { type?: string; value?: string } | undefined;
-    if (item?.type === 'StringLiteral') {
+    if (item?.type === 'StringLiteral' && !(isRequireCall && name === 'arguments')) {
       const itemKey = (key + state.count * 17) % 251;
       const itemStep = ((step + state.count * 3) % 31) + 5;
       const bytes = [...Buffer.from(item.value ?? '', 'utf8')].map((byte, offset) => (byte + itemKey + offset * itemStep) % 256);
@@ -58,7 +61,7 @@ function rewriteStrings(value: unknown, key: number, step: number, decoder: stri
       state.count += 1;
       count += 1;
     } else {
-      count += rewriteStrings(child, key, step, decoder, state);
+      count += rewriteStrings(child, key, step, decoder, state, isRequireCall && name === 'arguments');
     }
   }
   return count;

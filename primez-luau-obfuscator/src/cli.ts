@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import { readFile, writeFile } from 'node:fs/promises';
+import { buildBundle } from './bundle.js';
 import { classifyCompatibility, extractDirectives, parseLuau, renderLuau } from './frontend.js';
 import { applySafeTransforms } from './transforms.js';
 import { scanForSecrets } from './secrets.js';
@@ -53,6 +54,24 @@ cli.command('build <input> <output>')
     console.log(`built ${output}`);
     console.log(`profile: ${options.profile}; renamed bindings: ${result.renamed}; encoded strings: ${result.encodedStrings}; VM candidates: ${result.vmCandidates}; VM lowered: ${result.vmLowered}`);
     printReport({ ...report, skippedTransforms: result.skipped });
+  });
+
+cli.command('bundle <manifest> <output-dir>')
+  .description('Protect a static Luau module graph while preserving module boundaries')
+  .action(async (manifestPath: string, outputDir: string) => {
+    const manifest = JSON.parse(await readFile(manifestPath, 'utf8')) as Parameters<typeof buildBundle>[0];
+    const report = await buildBundle(manifest, manifestPath, outputDir);
+    console.log(`bundled ${report.modules.length} module(s) to ${report.outputDir}`);
+    console.log(`entry: ${report.entry}`);
+    if (report.unresolvedModules.length) {
+      console.log('unresolved modules:');
+      for (const unresolved of report.unresolvedModules) console.log(`- ${unresolved}`);
+    } else {
+      console.log('unresolved modules: none');
+    }
+    for (const module of report.modules) {
+      console.log(`- ${module.source}: ${module.excluded ? 'EXCLUDED' : module.compatibility.status}`);
+    }
   });
 
 cli.parseAsync().catch((error: unknown) => {

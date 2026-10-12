@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, rm } from 'node:fs/promises';
+import { mkdir, readFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 
 const root = new URL('../', import.meta.url);
@@ -10,6 +10,8 @@ const arithmeticFixture = new URL('examples/pure-arithmetic.luau', root);
 const executorFixture = new URL('examples/executor-apis.luau', root);
 const executorMatrixFixture = new URL('examples/executor-matrix.luau', root);
 const luauSyntaxFixture = new URL('examples/luau-syntax.luau', root);
+const bundleManifest = new URL('examples/bundle-fixture/manifest.json', root);
+const bundleOutput = new URL('.bundle-test/', root);
 const output = new URL('test-output.luau', root);
 
 test('inspect reports a valid Luau UI-style fixture', () => {
@@ -38,6 +40,18 @@ test('preserves Luau directives, types, annotations, varargs, and if-expressions
   assert.match(protectedSource, /\.\.\./);
   assert.match(protectedSource, /if .* then .* else/);
   await rm(output, { force: true });
+});
+
+test('bundles static relative modules without encoding require specifiers', async () => {
+  await mkdir(bundleOutput, { recursive: true });
+  const result = execFileSync(process.execPath, [cli.pathname, 'bundle', bundleManifest.pathname, bundleOutput.pathname], { encoding: 'utf8' });
+  assert.match(result, /bundled 2 module\(s\)/);
+  assert.match(result, /unresolved modules: none/);
+  const bundledEntry = await readFile(new URL('main.luau', bundleOutput), 'utf8');
+  const bundledHelper = await readFile(new URL('helper.luau', bundleOutput), 'utf8');
+  assert.match(bundledEntry, /require\("\.\/helper"\)/);
+  assert.match(bundledHelper, /return/);
+  await rm(bundleOutput, { recursive: true, force: true });
 });
 
 test('VM candidate analysis is conservative around Roblox-boundary calls', () => {

@@ -9,6 +9,7 @@ const fixture = new URL('examples/ui-sample.luau', root);
 const arithmeticFixture = new URL('examples/pure-arithmetic.luau', root);
 const executorFixture = new URL('examples/executor-apis.luau', root);
 const executorMatrixFixture = new URL('examples/executor-matrix.luau', root);
+const luauSyntaxFixture = new URL('examples/luau-syntax.luau', root);
 const output = new URL('test-output.luau', root);
 
 test('inspect reports a valid Luau UI-style fixture', () => {
@@ -25,6 +26,17 @@ test('build is deterministic for a fixed seed and preserves strict directive', a
   assert.equal(first, second);
   assert.match(first, /^--!strict/);
   assert.match(first, /Instance/);
+  await rm(output, { force: true });
+});
+
+test('preserves Luau directives, types, annotations, varargs, and if-expressions', async () => {
+  execFileSync(process.execPath, [cli.pathname, 'build', luauSyntaxFixture.pathname, output.pathname, '--profile', 'balanced', '--seed', '123'], { encoding: 'utf8' });
+  const protectedSource = await readFile(output, 'utf8');
+  assert.match(protectedSource, /^--!strict/);
+  assert.match(protectedSource, /type Pair/);
+  assert.match(protectedSource, /: number/);
+  assert.match(protectedSource, /\.\.\./);
+  assert.match(protectedSource, /if .* then .* else/);
   await rm(output, { force: true });
 });
 
